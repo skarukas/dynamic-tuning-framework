@@ -1,15 +1,22 @@
 import { Util } from "./util";
 
 // Intervals are generally meant to be immutable
-export interface Interval {
-    inverse(): Interval;
-    add(other: Interval): Interval;
-    subtract(other: Interval): Interval;
-    stretch(factor: number): Interval;
-    asRatio(): FreqRatio;
-    asET(base?: number): ETInterval;
-    getNearestET(base?: number): ETInterval; // returns closest integer ET in base
-    normalized(): Interval; // compressed to an octave
+export abstract class Interval {
+    abstract inverse(): Interval;
+    abstract add(other: Interval): Interval;
+    abstract stretch(factor: number): Interval;
+    abstract asRatio(): FreqRatio;
+    abstract asET(base?: number): ETInterval;
+    abstract normalized(): Interval; // compressed to an octave
+
+    getNearestET(base: number = 12): ETInterval { // returns closest integer ET in base
+        let et: ETInterval = this.asET(base);
+        et.n = Math.round(et.n);
+        return et;
+    }
+    subtract(other: Interval): Interval {
+        return this.add(other.inverse());
+    }
 }
 
 // namespace for static comparison functions
@@ -47,29 +54,14 @@ class Fraction {
     divide(other: Fraction): Fraction { return Fraction.dtf(this.decimal() / other.decimal()) }
 }
 
-abstract class FracInterval implements Interval {
-    constructor(public n: number, public d: number = 1) {
-        this.frac = new Fraction(n, d);
-    }
+abstract class FracInterval extends Interval {
     protected frac: Fraction;
-    abstract inverse(): Interval;   
-    abstract add(other: Interval): Interval;
-    abstract stretch(factor: number): Interval;
-    abstract asRatio(): FreqRatio;
-    abstract asET(base?: number): ETInterval;
-    abstract normalized(): Interval;
-
-    getNearestET(base: number = 12): ETInterval {
-        let et: ETInterval = this.asET(base);
-        et.n = Math.round(et.n);
-        return et;
-    }
-    subtract(other: Interval): Interval {
-        return this.add(other.inverse());
+    constructor(public n: number, public d: number = 1) {
+        super();
+        this.frac = new Fraction(n, d);
     }
 }
 
-// I don't like that Fraction methods are publicly available
 export class FreqRatio extends FracInterval {
     // FreqRatio methods
     static fromFraction(frac: Fraction): FreqRatio {

@@ -32,6 +32,9 @@ export const Util = {
         let i = primes.length - 1;
 
         // select already generated primes less than limit
+        /**
+         * TODO: use binary search instead
+         */
         if (i >= 0 && limit <= primes[i]) {
             while (limit < primes[i]) i--;
             return primes.slice(0, i + 1);
