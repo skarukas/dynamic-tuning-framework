@@ -2,6 +2,19 @@ import { Util } from "./util";
 
 // Intervals are generally meant to be immutable
 export abstract class Interval {
+    // static comparison functions
+    static compareSize(_a: Interval, _b: Interval): number {
+        let a = _a.asET(), 
+            b = _b.asET();
+        return a.n - b.n;
+    }
+    static compareComplexity(_a: Interval, _b: Interval): number {
+        let a = _a.asRatio(), 
+            b = _b.asRatio(),
+            x = a.largestPrimeFactor(),
+            y = b.largestPrimeFactor();
+        return (x != y)? x - y : (a.n + a.d) - (b.n + b.d);
+    }
     abstract inverse(): Interval;
     abstract add(other: Interval): Interval;
     abstract stretch(factor: number): Interval;
@@ -16,22 +29,6 @@ export abstract class Interval {
     }
     subtract(other: Interval): Interval {
         return this.add(other.inverse());
-    }
-}
-
-// namespace for static comparison functions
-export const IntervalSort = {
-    bySize(_a: Interval, _b: Interval): number {
-        let a = _a.asET(), 
-            b = _b.asET();
-        return a.n - b.n;
-    },
-    byComplexity(_a: Interval, _b: Interval): number {
-        let a = _a.asRatio(), 
-            b = _b.asRatio(),
-            x = a.largestPrimeFactor(),
-            y = b.largestPrimeFactor();
-        return (x != y)? x - y : (a.n + a.d) - (b.n + b.d);
     }
 }
 
