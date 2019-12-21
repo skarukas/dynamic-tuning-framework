@@ -1,12 +1,16 @@
-export const Util = {
+const Util = {
     __primes: [],
     refA: 440,
+    round: (n: number, places: number = 0): number => {
+        let c = 10**places;
+        return Math.round(n * c) / c;
+    },
     log: (n: number, base: number) => Math.log(n) / Math.log(base),
-    log2:(n: number) => this.log(n, 2),
+    log2:(n: number) => Util.log(n, 2),
     mod: (n: number, base: number = 1): number => ((n % base) + base) % base,
-    powerMod: (n: number, base: number) => base**(this.mod(this.log(n, base))),
-    ETToFreq: (pitch: number, base: number = 12) => this.refA * 2**(pitch / base),
-    freqToET: (freq: number, base: number = 12) => base * this.log2(freq / this.refA),
+    powerMod: (n: number, base: number) => base**(Util.mod(Util.log(n, base))),
+    ETToFreq: (pitch: number, base: number = 12) => Util.refA * 2**((pitch - 69) / base),
+    freqToET: (freq: number, base: number = 12) => base * Util.log2(freq / Util.refA) + 69,
     dtf(n: number, err: number = 1E-9): number[] { 
         let x = n,
             a = Math.floor(x),
@@ -28,7 +32,7 @@ export const Util = {
         return [h, k];
     },
     generatePrimes(limit: number): number[] {
-        let primes: number[] = this.__primes;
+        let primes: number[] = Util.__primes;
         let i = primes.length - 1;
 
         // select already generated primes less than limit
@@ -52,7 +56,7 @@ export const Util = {
         return primes.slice();
     },
     largestPrimeFactor(n: number): number {
-        let primes = this.generatePrimes(n);
+        let primes = Util.generatePrimes(n);
         for (let i = primes.length - 1; i >= 0; i--) {
             if (n % primes[i] == 0) return primes[i];
         }
@@ -68,3 +72,5 @@ export const Util = {
         return result;
     }
 }
+
+export { Util };

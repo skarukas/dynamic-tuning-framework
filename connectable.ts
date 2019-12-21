@@ -34,14 +34,15 @@ export abstract class Note implements Connectable {
 
     // what if someone transposes it and it's still part of a Component?
     abstract transposeBy(interval: Interval): void; // mutator
-    addInterval(interval: Interval): Note { // non-mutator
-        let copy = Object.assign({} as Note, this);
-        copy.transposeBy(interval);
-        return copy;
+    abstract noteAbove(interval: Interval): Note; // non-mutator
+    noteBelow(interval: Interval): Note {
+        return this.noteAbove(interval.inverse());
     }
     abstract getETPitch(): number;
     abstract getFrequency(): number;
-    abstract intervalTo(other: Note): Interval;
+    intervalTo(other: Note): Interval {
+        return new FreqRatio(other.getFrequency(), this.getFrequency());
+    }
 
     getRoot() { return this }
 
@@ -59,11 +60,12 @@ export abstract class Note implements Connectable {
 }
 
 export class MIDINote extends Note {
+    noteAbove(interval: Interval): Note { // non-mutator
+        let newPitch = this.pitch + interval.asET().steps;
+        return new MIDINote(newPitch, this.velocity);
+    }
     transposeBy(interval: Interval): void {
         this.pitch += interval.asET().steps;
-    }
-    intervalTo(other: Note): Interval {
-        return new ETInterval(other.getETPitch() - this.getETPitch());
     }
     getETPitch(): number {
        return this.pitch;
@@ -77,11 +79,13 @@ export class MIDINote extends Note {
 }
 
 export class Frequency extends Note {
+    noteAbove(interval: Interval): Note { // non-mutator
+        let copy = Object.assign({} as Frequency, this);
+        copy.transposeBy(interval);
+        return copy;
+    }
     transposeBy(interval: Interval): void {
         this.freq *= interval.asRatio().decimal();
-    }
-    intervalTo(other: Note): Interval {
-        return new FreqRatio(other.getFrequency(), this.getFrequency());
     }
     getETPitch(): number {
         return Util.freqToET(this.freq);
