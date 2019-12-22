@@ -1,7 +1,6 @@
-import Interval from "./Interval";
-import Fraction from "./Fraction";
+import {Interval, Fraction} from "../internal";
 
-export default abstract class FracInterval extends Interval {
+export default abstract class AbstractFracInterval extends Interval {
     protected frac: Fraction;
     constructor(n: number, d: number = 1) {
         super();

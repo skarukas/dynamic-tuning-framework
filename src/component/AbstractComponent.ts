@@ -1,11 +1,9 @@
-import Note from "../note/Note";
-import Interval from "../interval/Interval";
-import Connectable from "./Connectable";
+import {Interval, Connectable, Note} from "../internal";
 
-export default abstract class Component implements Connectable {
+export default abstract class AbstractComponent implements Connectable {
     constructor(private root: Note) { }
     public notes: Note[];
-    abstract connect(other: Connectable, by: Interval): Component;
+    abstract connect(other: Connectable, by: Interval): AbstractComponent;
     abstract setInterval(a: Note, b: Note, interval: Interval): void;
     abstract add();
     abstract remove(v: Note): boolean;

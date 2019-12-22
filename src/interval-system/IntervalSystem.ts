@@ -1,4 +1,4 @@
-import Interval from "../interval/Interval";
+import { Interval } from "../internal";
 
 export default class IntervalSystem {
     // the interval system will be defined 

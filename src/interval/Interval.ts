@@ -1,7 +1,4 @@
-import Util from "../Util";
-import PitchedObj from "../note/PitchedObj";
-import ETInterval from "./ETInterval";
-import FreqRatio from "./FreqRatio";
+import { PitchedObj, FreqRatio, ETInterval, Util } from "../internal";
 
 // Intervals are generally meant to be immutable
 export default abstract class Interval implements PitchedObj {

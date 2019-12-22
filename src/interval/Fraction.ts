@@ -1,4 +1,4 @@
-import Util from "../Util";
+import { Util } from "../internal";
 
 export default class Fraction {
     constructor(public n: number, public d: number = 1) { }

@@ -1,6 +1,4 @@
-import FreqRatio from "../interval/FreqRatio";
-import Util from "../Util";
-import IntervalSystem from "./IntervalSystem";
+import { IntervalSystem, Util, FreqRatio } from "../internal";
 
 export default class JustSystem extends IntervalSystem {
     constructor(public readonly limit: number = 5) {

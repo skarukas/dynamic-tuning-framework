@@ -1,6 +1,4 @@
-import Note from "../note/Note";
-import Interval from "../interval/Interval";
-import Component from "./Component";
+import { Interval, Component, Note } from "../internal";
 
 export default interface Connectable {
     connect(other: Connectable, by: Interval): Component; // rename??

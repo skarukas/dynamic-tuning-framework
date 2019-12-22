@@ -1,6 +1,4 @@
-import Interval from "../interval/Interval";
-import Util from "../Util";
-import Note from "./Note";
+import {Interval, Note, Util } from "../internal";
 
 export default class Frequency extends Note {
     noteAbove(interval: Interval): Note {

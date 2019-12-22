@@ -1,7 +1,4 @@
-import Util from "../Util";
-import Interval from "./Interval";
-import FracInterval from "./FracInterval";
-import FreqRatio from "./FreqRatio";
+import { FracInterval, Interval, Util, FreqRatio } from "../internal";
 
 export default class ETInterval extends FracInterval {
     valueOf(): string {

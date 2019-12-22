@@ -1,8 +1,4 @@
-import FreqRatio from "../src/interval/FreqRatio";
-import MIDINote from "../src/note/MIDINote";
-import JI from "../src/interval-system/JI";
-import Util from "../src/util";
-import ET from "../src/interval-system/ET";
+import {FreqRatio, MIDINote, JI, Util, ET, Interval, ETInterval } from "../index";
 
 // commas
 let syntonic = new FreqRatio(81, 80),
@@ -25,7 +21,7 @@ console.log(pythagorean)
 // demonstrating the "error" of different EDOs in representing pure prime ratios
 
 // generate prime harmonics up to 7
-let intervals = Util.generatePrimes(5).map((n) => new FreqRatio(n));
+let intervals: Interval[] = Util.generatePrimes(7).map((n) => new FreqRatio(n));
 
 // check EDOs from 6 to 53
 for (let base = 6; base <= 53; base++) {
@@ -40,4 +36,7 @@ for (let base = 6; base <= 53; base++) {
 
 // this does it another way
 console.log(ET.bestFitET(intervals));
+console.log(ET.bestFitETs(intervals));
+
+intervals = [new ETInterval(1), new ETInterval(1, 19)]
 console.log(ET.bestFitETs(intervals));

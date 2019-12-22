@@ -1,4 +1,4 @@
-import PitchedObj from "../note/PitchedObj";
+import { PitchedObj } from "../internal";
 
 const ET = {
     bestFitET: (pitchedArr: PitchedObj[],  maxBase = 53): number => {

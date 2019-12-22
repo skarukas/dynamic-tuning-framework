@@ -1,8 +1,4 @@
-import ETInterval from "../interval/ETInterval";
-import FreqRatio from "../interval/FreqRatio";
-import Note from "./Note";
-import Frequency from "./Frequency";
-import ETPitch from "./ETPitch";
+import { Note, FreqRatio, Frequency, ETInterval, ETPitch } from "../internal";
 
 export default interface PitchedObj {
     errorInET(base?: number, from?: Note): number;

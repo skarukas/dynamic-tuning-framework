@@ -1,6 +1,4 @@
-import Interval from "../interval/Interval";
-import Util from "../Util";
-import Note from "./Note";
+import { Note, Interval, Util } from "../internal";
 
 type Constructor = { new(...args: any): any }
 

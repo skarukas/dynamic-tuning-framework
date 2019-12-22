@@ -1,7 +1,4 @@
-import Note from "../note/Note";
-import Interval from "../interval/Interval";
-import Connectable from "./Connectable";
-import Component from "./Component";
+import { Component, Note, Interval, Connectable } from "../internal";
 
 export default class TreeComponent extends Component {
     private edges: Map<Note, Map<Note, Interval>>;

@@ -1,4 +1,4 @@
-import Util from "../Util";
+import { Util } from "../internal";
 
 function powerMod(n, base) {
     let log = Math.log(n) / Math.log(base);

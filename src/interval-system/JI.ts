@@ -1,4 +1,4 @@
-import FreqRatio from "../interval/FreqRatio";
+import { FreqRatio } from "../internal";
 
 const JI = {
     third: new FreqRatio(5 / 4),

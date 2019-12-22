@@ -1,4 +1,4 @@
-import Connectable from "./Connectable";
+import { Connectable } from "../internal";
 
 export default class PitchCollection {
     components: Connectable[];
