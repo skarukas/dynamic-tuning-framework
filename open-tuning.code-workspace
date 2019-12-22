@@ -2,10 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"name": "dynamic-tuning-framework",
-			"path": "dynamic-tuning-framework"
 		}
 	]
 }

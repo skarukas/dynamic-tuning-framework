@@ -1,8 +1,6 @@
-import { Interval, ETInterval, FreqRatio } from "./intervals";
-import { Util } from "./util";
-import { Connectable } from "./connectable";
+import Connectable from "./Connectable";
 
-export class PitchCollection {
+export default class PitchCollection {
     components: Connectable[];
     add(c: Connectable): void {
         this.components.push(c);

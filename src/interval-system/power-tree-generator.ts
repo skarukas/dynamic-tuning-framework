@@ -1,20 +1,4 @@
-import { FreqRatio, Interval } from "./intervals";
-import { Util } from "./util";
-
-class IntervalSystem {
-    // the interval system will be defined 
-    generators: Interval[];
-}
-
-class JustSystem extends IntervalSystem {
-    constructor(public readonly limit: number = 5) {
-        super();
-        
-        // generators set as whole numbers, don't use 2
-        let primes = Util.generatePrimes(limit).slice(1);
-        this.generators = primes.map((n: number) => new FreqRatio(n));
-    }
-}
+import Util from "../Util";
 
 function powerMod(n, base) {
     let log = Math.log(n) / Math.log(base);
