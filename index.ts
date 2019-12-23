@@ -5,4 +5,5 @@ export {ETPitch,
         ET, 
         JI, 
         MIDINote,
-        Interval } from "./src/internal";
+        Interval,
+        Note } from "./src/internal";

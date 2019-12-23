@@ -5,14 +5,14 @@ import AbstractComponent from "./component/AbstractComponent"
 import Connectable from "./component/Connectable"
 import TreeComponent from "./component/TreeComponent"
 
-import AbstractNote from "./note/AbstractNote"
+import Note from "./note/Note"
 import ETPitch from "./note/ETPitch"
 import MIDINote from "./note/MIDINote"
 import Frequency from "./note/Frequency"
 
 import Fraction from "./interval/Fraction"
 import Interval from "./interval/Interval"
-import AbstractFracInterval from "./interval/AbstractFracInterval"
+import FracInterval from "./interval/FracInterval"
 import ETInterval from "./interval/ETInterval"
 import FreqRatio from "./interval/FreqRatio"
 
@@ -28,12 +28,12 @@ export {Util,
         Connectable, 
         TreeComponent, 
         ETInterval, 
-        AbstractFracInterval as FracInterval, 
+        FracInterval as FracInterval, 
         FreqRatio, 
         ET, 
         JI, 
         ETPitch, 
-        AbstractNote as Note, 
+        Note as Note, 
         MIDINote, 
         Frequency, 
         Fraction, 

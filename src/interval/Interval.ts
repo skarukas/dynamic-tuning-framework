@@ -2,6 +2,7 @@ import { PitchedObj, FreqRatio, ETInterval, Util } from "../internal";
 
 // Intervals are generally meant to be immutable
 export default abstract class Interval implements PitchedObj {
+    static octave: FreqRatio;
     // static comparison functions
     static compareSize(_a: Interval, _b: Interval): number {
         let a = _a.asET(), b = _b.asET();

@@ -42,3 +42,5 @@ export default class FreqRatio extends FracInterval {
         return FreqRatio.fromFraction(product);
     }
 }
+
+Interval.octave = new FreqRatio(2);
