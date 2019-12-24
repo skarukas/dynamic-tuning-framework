@@ -2,7 +2,7 @@ import {Interval, Note, Util } from "../internal";
 
 export default class Frequency extends Note {
     noteAbove(interval: Interval): Note {
-        let copy = Object.assign({} as Frequency, this);
+        let copy = new Frequency(this.freq);
         copy.transposeBy(interval);
         return copy;
     }

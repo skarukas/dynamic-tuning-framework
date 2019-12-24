@@ -3,7 +3,8 @@ import { Component, Note, Interval, Connectable } from "../internal";
 export default class TreeComponent extends Component {
     private edges: Map<Note, Map<Note, Interval>>;
     setInterval(a: Note, b: Note, interval: Interval): void {
-        let diff: Interval = interval.subtract(a.intervalTo(b)), descendants: Note[] = this.getSubTree(b, a);
+        let diff: Interval = interval.subtract(a.intervalTo(b)), 
+            descendants: Note[] = this.getSubTree(b, a);
         // transpose b and all its descendants (to preserve other intervals)
         for (let note of descendants)
             note.transposeBy(diff);

@@ -3,18 +3,23 @@ import Util from "./util"
 import PitchedObj from "./note/PitchedObj"
 import AbstractComponent from "./component/AbstractComponent"
 import Connectable from "./component/Connectable"
-import TreeComponent from "./component/TreeComponent"
+import TreeComponent from "./component/TreeComponent" // hmm
 
 import Note from "./note/Note"
+import NullNote from "./note/NullNote"
+import Frequency from "./note/Frequency"
 import ETPitch from "./note/ETPitch"
 import MIDINote from "./note/MIDINote"
-import Frequency from "./note/Frequency"
 
 import Fraction from "./interval/Fraction"
 import Interval from "./interval/Interval"
 import FracInterval from "./interval/FracInterval"
 import ETInterval from "./interval/ETInterval"
 import FreqRatio from "./interval/FreqRatio"
+
+import IntervalStructure from "./interval-system/IntervalStructure"
+import IntervalTree from "./interval-system/IntervalTree"
+import RootedIntervalTree from "./interval-system/RootedIntervalTree"
 
 import PitchCollection from "./component/PitchCollection"
 import IntervalSystem from "./interval-system/IntervalSystem"
@@ -28,17 +33,21 @@ export {Util,
         Connectable, 
         TreeComponent, 
         ETInterval, 
-        FracInterval as FracInterval, 
+        FracInterval, 
         FreqRatio, 
         ET, 
         JI, 
         ETPitch, 
-        Note as Note, 
+        Note, 
+        NullNote,
         MIDINote, 
         Frequency, 
         Fraction, 
         PitchCollection, 
         Interval,
+        IntervalTree,
+        RootedIntervalTree,
         IntervalSystem,
         JustSystem,
-        PitchedObj}
+        PitchedObj,
+        IntervalStructure}
