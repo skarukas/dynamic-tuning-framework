@@ -27,6 +27,7 @@ import JustSystem from "./interval-system/JustSystem"
 
 import ET from "./interval-system/ET"
 import JI from "./interval-system/JI"
+import AdaptiveTuning from "./interval-system/AdaptiveTuning"
 
 export {Util,
         AbstractComponent as Component, 
@@ -37,6 +38,7 @@ export {Util,
         FreqRatio, 
         ET, 
         JI, 
+        AdaptiveTuning,
         ETPitch, 
         Note, 
         NullNote,

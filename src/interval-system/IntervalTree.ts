@@ -1,4 +1,4 @@
-import {IntervalStructure, NullNote, Interval, FreqRatio, ETInterval, Note, RootedIntervalTree} from "../internal";
+import {IntervalStructure, NullNote, Interval, FreqRatio, ETInterval, Note, RootedIntervalTree, Util, Frequency} from "../internal";
 
 // seperate class for non-null notes?
 export default class IntervalTree extends IntervalStructure {

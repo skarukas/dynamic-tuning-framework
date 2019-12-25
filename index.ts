@@ -9,4 +9,5 @@ export {ETPitch,
         Interval,
         NullNote,
         IntervalTree,
+        AdaptiveTuning,
         Note } from "./src/internal";

@@ -70,6 +70,18 @@ const Util = {
             }
         }
         return result;
+    },
+    getMin<T>(arr: T[], lessThan?: (a: T, b: T) => boolean) : [number, T] {
+        lessThan = (a, b) => a < b;
+        let minIndex = 0,
+            minValue = arr[0];
+        for (let i = 0; i < arr.length; i++) {
+            if (lessThan(arr[i], minValue)) {
+                minIndex = i;
+                minValue = arr[i];
+            }
+        }
+        return [minIndex, minValue];
     }
 }
 

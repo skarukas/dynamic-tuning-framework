@@ -1,4 +1,4 @@
-import { IntervalTree, NullNote, JI, ETPitch, Frequency } from "../index";
+import { IntervalTree, NullNote, JI, ETPitch, Frequency, AdaptiveTuning } from "../index";
 
 let a = new NullNote();
 
@@ -22,6 +22,9 @@ let sevenPartials = IntervalTree.harmonicSeries(7, new Frequency(100)),
 let thirteen = IntervalTree.ET(13, new ETPitch(0, 13)),
     thirteen2 = thirteen.inverse();
 
+let notes = [0].map(a => new ETPitch(a)),
+    harmTree = AdaptiveTuning.bestFitPartials(notes);
+/*
 console.log(dom9);
 console.log(A9);
 console.log(C9);
@@ -29,4 +32,5 @@ console.log(å);
 console.log(sevenPartials);
 console.log(invertedSeven);
 console.log(thirteen);
-console.log(thirteen2);
+console.log(thirteen2); */
+console.log(harmTree);
