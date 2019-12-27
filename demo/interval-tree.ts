@@ -1,4 +1,5 @@
-import { IntervalTree, NullNote, JI, ETPitch, Frequency, AdaptiveTuning } from "../index";
+import { IntervalTree, NullNote, JI, ETPitch, Frequency, AdaptiveTuning, ET } from "../index";
+import { MIDINote } from "../src/internal";
 
 let a = new NullNote();
 
@@ -22,8 +23,12 @@ let sevenPartials = IntervalTree.harmonicSeries(7, new Frequency(100)),
 let thirteen = IntervalTree.ET(13, new ETPitch(0, 13)),
     thirteen2 = thirteen.inverse();
 
-let notes = [0].map(a => new ETPitch(a)),
-    harmTree = AdaptiveTuning.bestFitPartials(notes);
+// generate best-fit sequence of the harmonic series
+let notes = [65, 23, 45, 46, 34].map(a => new ETPitch(a)),
+    tree = AdaptiveTuning.bestFitPartials(notes).asTree();
+
+let fourThroughSeven = IntervalTree.harmonicSeries([4, 5, 6, 7], MIDINote.middleC);
+
 /*
 console.log(dom9);
 console.log(A9);
@@ -33,4 +38,5 @@ console.log(sevenPartials);
 console.log(invertedSeven);
 console.log(thirteen);
 console.log(thirteen2); */
-console.log(harmTree);
+console.log(tree);
+console.log(fourThroughSeven.getAllNotes())

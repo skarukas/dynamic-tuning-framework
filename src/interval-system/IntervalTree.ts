@@ -16,11 +16,22 @@ export default class IntervalTree extends IntervalStructure {
         }
         return result;
     }
-    static harmonicSeries(limit: number, root: Note = new NullNote()): IntervalTree { 
-        let result = (root instanceof NullNote)? new IntervalTree(root) : new RootedIntervalTree(root);
-        //root.structural = true;
+    /**
+     * Generate a set of partials from the harmonic series.
+     * 
+     * @param range Range of partial numbers, either specified as an upper bound (inclusive) or an array
+     * @param fundamental The `Note` to set as the fundamental (root of the tree). The default value is a `NullNote`, which creates a purely structural `IntervalTree`.
+     */
+    static harmonicSeries(range: number | number[], fundamental: Note = new NullNote()): IntervalTree { 
+        let result = (fundamental instanceof NullNote)? new IntervalTree(fundamental) : new RootedIntervalTree(fundamental);
+        fundamental.isStructural = true;
+        if (typeof range == "number") {
+            // Array of numbers from 1 to range, inclusive
+            range = Array.from(Array(range), (_, i) => i + 1);
+        }
 
-        for (let i = 2; i <= limit; i++) {
+        for (let i of range) {
+            if (i == 1) fundamental.isStructural = false;
             result.connect(result.root, new FreqRatio(i));
         }
         return result; 

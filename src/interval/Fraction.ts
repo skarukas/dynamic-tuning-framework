@@ -5,8 +5,8 @@ export default class Fraction {
     toString(): string {
         return `${this.n}/${this.d}`;
     }
-    static dtf(n: number, err: number = 1E-9) {
-        let [a, b] = Util.dtf(n, err);
+    static dtf(n: number) {
+        let [a, b] = Util.dtf(n);
         return new Fraction(a, b);
     }
     simplified(): Fraction {

@@ -1,7 +1,7 @@
 import { PitchedObj, FreqRatio, ETInterval, Util } from "../internal";
 
 // Intervals are generally meant to be immutable
-export default abstract class Interval implements PitchedObj {
+export default abstract class Interval implements PitchedObj { 
     static octave: FreqRatio;
     // static comparison functions
     static compareSize(_a: Interval, _b: Interval): number {
@@ -9,8 +9,18 @@ export default abstract class Interval implements PitchedObj {
         return a.n - b.n;
     }
     static compareComplexity(_a: Interval, _b: Interval): number {
-        let a = _a.asFrequency(), b = _b.asFrequency(), x = a.largestPrimeFactor(), y = b.largestPrimeFactor();
+        let a = _a.asFrequency(), 
+            b = _b.asFrequency(), 
+            x = a.largestPrimeFactor(), 
+            y = b.largestPrimeFactor();
         return (x != y) ? x - y : (a.n + a.d) - (b.n + b.d);
+    }
+    abstract mod(modulus: Interval): Interval;
+    /**
+     * Compress the interval to an octave.
+     */
+    normalized(): Interval {
+        return this.mod(Interval.octave);
     }
     abstract inverse(): Interval;
     abstract add(other: Interval): Interval;
@@ -29,7 +39,6 @@ export default abstract class Interval implements PitchedObj {
     equals(other: Interval): boolean {
         return this.cents() - other.cents() < 1E-2;
     }
-    abstract normalized(): Interval; // compressed to an octave
     errorInET(base: number = 12): number {
         let et = this.getNearestET(base);
         return this.subtract(et).cents();

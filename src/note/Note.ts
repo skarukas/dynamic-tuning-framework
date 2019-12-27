@@ -1,12 +1,11 @@
 import { Connectable, PitchedObj, Interval, FreqRatio, Frequency, ETPitch, MIDINote, Component, TreeComponent } from "../internal";
 
-
 export default abstract class Note implements Connectable, PitchedObj {
     static middleC: ETPitch;
     id: string; // for non-unique identification independent from actual pitch/freq, such as letter note name
-    structural: boolean = false; // structural notes are not played back and exist purely to give structure to the pitch tree
+    isStructural: boolean = false; // structural notes are not played back and exist purely to give structure to the pitch tree
     /**
-     * use for filtering:
+     * Use for filtering:
      * `myCollection.filter(Note.inFreqRange(200, 300))`
      */
     static inFreqRange(lo: number, hi: number): (note: Note) => boolean {

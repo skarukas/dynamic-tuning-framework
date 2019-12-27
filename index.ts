@@ -10,4 +10,6 @@ export {ETPitch,
         NullNote,
         IntervalTree,
         AdaptiveTuning,
-        Note } from "./src/internal";
+        Note,
+        ScaleMapping,
+        ETMapping } from "./src/internal";

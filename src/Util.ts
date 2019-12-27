@@ -7,11 +7,25 @@ const Util = {
     },
     log: (n: number, base: number) => Math.log(n) / Math.log(base),
     log2:(n: number) => Util.log(n, 2),
-    mod: (n: number, base: number = 1): number => ((n % base) + base) % base,
-    powerMod: (n: number, base: number) => base**(Util.mod(Util.log(n, base))),
+    /**
+     * Calculate the modulo of two numbers. In contrast to `%`, this never returns a negative number.
+     */
+    mod: (n: number, base: number): number => ((n % base) + base) % base,
+    powerMod: (n: number, base: number) => base**(Util.mod(Util.log(n, base), 1)),
+    /**
+     * Calculate the closest integer between zero and a number.
+     */
+    absFloor: (n: number) => (n >= 0)? Math.floor(n) : Math.ceil(n),
     ETToFreq: (pitch: number, base: number = 12) => Util.refA * 2**((pitch - 69) / base),
     freqToET: (freq: number, base: number = 12) => base * Util.log2(freq / Util.refA) + 69,
-    dtf(n: number, err: number = 1E-9): number[] { 
+    /**
+     * Give the rational approximation of a number using continued fractions.
+     * 
+     * @param n A floating-point number.
+     * @param places The number of places at which to round. Defaults to 9.
+     */
+    dtf(n: number, places: number = 9): number[] { 
+        let err = 10 ** -places;
         let x = n,
             a = Math.floor(x),
             h1 = 1,
@@ -31,7 +45,12 @@ const Util = {
         }
         return [h, k];
     },
-    generatePrimes(limit: number): number[] {
+    /**
+     * Generate all prime numbers up to `limit` (inclusive).
+     */
+    primesUpTo(limit: number): number[] {
+        if (limit < 2) return [];
+
         let primes: number[] = Util.__primes;
         let i = primes.length - 1;
 
@@ -55,13 +74,21 @@ const Util = {
         }
         return primes.slice();
     },
+    /**
+     * Find the largest prime factor of an integer.
+     */
     largestPrimeFactor(n: number): number {
-        let primes = Util.generatePrimes(n);
+        if (n % 1 !== 0) return 1;
+
+        let primes = Util.primesUpTo(n);
         for (let i = primes.length - 1; i >= 0; i--) {
             if (n % primes[i] == 0) return primes[i];
         }
         return 1;
     },
+    /**
+     * Get all possible unordered pairs (2-combinations) of an array.
+     */
     getPairs<T>(arr: T[]): T[][] {
         let result: T[][] = [];
         for (let i = 0; i < arr.length; i++) {
@@ -71,7 +98,14 @@ const Util = {
         }
         return result;
     },
-    getMin<T>(arr: T[], lessThan?: (a: T, b: T) => boolean) : [number, T] {
+    /**
+     * Finds the minimum element in an array.
+     * 
+     * @param lessThan Custom callback for comparing non-numeric types.
+     * 
+     * @returns The minimum value and its index, wrapped in an object.
+     */
+    getMin<T>(arr: T[], lessThan?: (a: T, b: T) => boolean) : { index: number, value: T } {
         lessThan = (a, b) => a < b;
         let minIndex = 0,
             minValue = arr[0];
@@ -81,7 +115,7 @@ const Util = {
                 minValue = arr[i];
             }
         }
-        return [minIndex, minValue];
+        return { index: minIndex, value: minValue };
     }
 }
 

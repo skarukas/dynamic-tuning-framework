@@ -4,10 +4,10 @@ export default class ETInterval extends FracInterval {
     valueOf(): string {
         return `${this.n} [${this.d}ET]`;
     }
-    normalized(): Interval {
-        let a: number = this.n, b: number = this.d;
-        a = Util.mod(a, b);
-        return new ETInterval(a, b);
+    mod(modulus: Interval): ETInterval {
+        let other: ETInterval = modulus.asET(this.base),
+            remainder = Util.mod(this.n, other.n);
+        return new ETInterval(remainder, this.d);
     }
     multiply(factor: number): Interval {
         return new ETInterval(this.n * factor, this.d);

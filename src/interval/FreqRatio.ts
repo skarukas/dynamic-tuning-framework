@@ -13,7 +13,7 @@ export default class FreqRatio extends FracInterval {
         return new FreqRatio(frac.n, frac.d);
     }
     largestPrimeFactor(): number {
-        let norm = this.normalized();
+        let norm = this.normalized() as FreqRatio;
         return Util.largestPrimeFactor(norm.n * norm.d);
     }
     decimal(): number {
@@ -22,9 +22,10 @@ export default class FreqRatio extends FracInterval {
     valueOf(): string {
         return `${this.n}:${this.d}`;
     }
-    // Interval methods
-    normalized(): FreqRatio {
-        return this.asET().normalized().asFrequency();
+    mod(modulus: Interval): FreqRatio {
+        let decimalBase: number = modulus.asFrequency().decimal(),
+            remainder: number = Util.powerMod(this.decimal(), decimalBase);
+        return new FreqRatio(remainder);
     }
     multiply(factor: number): FreqRatio {
         return new FreqRatio(this.n ** factor, this.d);
@@ -37,8 +38,9 @@ export default class FreqRatio extends FracInterval {
     inverse(): FreqRatio {
         return new FreqRatio(this.d, this.n);
     }
-    add(other: Interval): FreqRatio {
-        let ratio = other.asFrequency(), product: Fraction = this.frac.times(ratio.frac);
+    add(other: FreqRatio): FreqRatio {
+        let ratio = other.asFrequency(), 
+            product: Fraction = this.frac.times(ratio.frac);
         return FreqRatio.fromFraction(product);
     }
 }
