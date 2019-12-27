@@ -1,5 +1,5 @@
 # dynamic-tuning
-Object-oriented TS library for dynamic musical tuning of pitch collections.
+Object-oriented TS library for musical tuning of pitch collections.
 
 This (work in progress) library provides object-oriented representations for musical objects such as pitches and intervals. 
 Both may be expressed in frequency (Hz) or pitch (MIDI numbers or indexes of an equal tempered scale).
