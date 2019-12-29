@@ -8,6 +8,7 @@ export default class ETMapping extends Mapping {
     }
     constructor(private base: number, notesPerOctave: number = 12) { 
         super(notesPerOctave);
+        this.zeroNote = (new ETPitch(this.zero)).asET(this.base);
     }
 
     /*

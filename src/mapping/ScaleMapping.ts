@@ -7,8 +7,9 @@ export default class ScaleMapping extends Mapping {
             // default to an ET scale
             this.map[i] = new ETInterval(i, notesPerOctave);
         }
+        this.zeroNote = (new ETPitch(this.zero)).asET(this.notesPerOctave);
     }
-    protected map: Interval[] = new Array(this.notesPerOctave);
+    map: Interval[] = new Array(this.notesPerOctave);
     protected getIntervalByIndex(key: number): Interval {
         return this.map[key];
     }

@@ -1,4 +1,4 @@
-import { Note, Interval, Util } from "../internal";
+import { Note, Interval, Util, ETInterval } from "../internal";
 
 type Constructor = { new(...args: any): any }
 
@@ -22,6 +22,9 @@ export default class ETPitch extends Note {
     }
     getFrequency(): number {
         return Util.ETToFreq(this.pitch, this.base);
+    }
+    intervalTo(other: Note): ETInterval {
+        return new ETInterval(other.getETPitch(this.base) - this.pitch, this.base);
     }
 }
 

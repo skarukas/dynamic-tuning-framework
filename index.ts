@@ -12,4 +12,5 @@ export {ETPitch,
         AdaptiveTuning,
         Note,
         ScaleMapping,
-        ETMapping } from "./src/internal";
+        ETMapping,
+        Mapping } from "./src/internal";

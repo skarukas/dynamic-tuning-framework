@@ -10,6 +10,7 @@ export default abstract class Mapping {
      */
     repeatInterval: Interval;
     zero = 60;
+    zeroNote : Note;
 
     constructor(notesPerOctave: number = 12) { 
         this.notesPerOctave = notesPerOctave;
@@ -19,13 +20,12 @@ export default abstract class Mapping {
     get(key: number): Note {
         // find scale degree and octave offset
         let diff: number = (key - this.zero),
-            numOctaves: number = Util.absFloor(diff / this.notesPerOctave),
+            numOctaves: number = Math.floor(diff / this.notesPerOctave),
             scaleIndex = Util.mod(diff, this.notesPerOctave),
             // retrieve interval from scale degree
             dist: Interval = this.getIntervalByIndex(scaleIndex),
             // get untransposed result
-            result: Note = (new ETPitch(this.zero)).noteAbove(dist);
-
+            result: Note = this.zeroNote.noteAbove(dist);
         // transpose result to the right "octave"
         return result.noteAbove(this.repeatInterval.multiply(numOctaves));
     }

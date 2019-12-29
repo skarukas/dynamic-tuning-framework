@@ -13,9 +13,9 @@ const Util = {
     mod: (n: number, base: number): number => ((n % base) + base) % base,
     powerMod: (n: number, base: number) => base**(Util.mod(Util.log(n, base), 1)),
     /**
-     * Calculate the closest integer between zero and a number.
+     * Calculate the next furthest integer away from zero.
      */
-    absFloor: (n: number) => (n >= 0)? Math.floor(n) : Math.ceil(n),
+    absCeil: (n: number) => (n >= 0)? Math.ceil(n) : Math.floor(n),
     ETToFreq: (pitch: number, base: number = 12) => Util.refA * 2**((pitch - 69) / base),
     freqToET: (freq: number, base: number = 12) => base * Util.log2(freq / Util.refA) + 69,
     /**
