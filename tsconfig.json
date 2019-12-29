@@ -9,7 +9,7 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "allowJs": true,
-        "outDir": "dist",
+        "outDir": "js",
         "baseUrl": ".",
         "paths": {
             "*": [
@@ -18,6 +18,6 @@
         }
     },
     "include": [
-        "src/**/*", "index.ts"
+        "ts/**/*"
     ]
 }

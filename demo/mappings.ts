@@ -1,4 +1,4 @@
-import { ScaleMapping, FreqRatio, ETPitch, ETMapping } from "../index";
+import { ScaleMapping, FreqRatio, ETPitch, ETMapping } from "../ts/index";
 
 let map = new ScaleMapping(12);
 

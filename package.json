@@ -2,7 +2,8 @@
   "name": "dynamic-tuning",
   "version": "1.0.0",
   "description": "Dynamic tuning software library",
-  "main": "index.js",
+  "main": "js/index.js",
+  "types": "js/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest"
@@ -43,5 +44,8 @@
       "preinstall": "echo Installing dependencies ...",
       "postinstall": "npm ls --depth 0"
     }
+  },
+  "dependencies": {
+    "@types/node": "^13.1.1"
   }
 }
