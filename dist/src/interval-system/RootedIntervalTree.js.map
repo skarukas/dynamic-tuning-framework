@@ -1,0 +1,1 @@
+{"version":3,"file":"RootedIntervalTree.js","sourceRoot":"","sources":["../../../src/interval-system/RootedIntervalTree.ts"],"names":[],"mappings":";;AAAA,0CAAiD;AAEjD,MAAqB,kBAAmB,SAAQ,uBAAY;IACxD,OAAO;QACH,OAAO,KAAK,CAAC,OAAO,EAAE,CAAC,QAAQ,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC;IAC/C,CAAC;IACD,YAAY,IAAU;QAClB,KAAK,CAAC,IAAI,CAAC,CAAC;IAChB,CAAC;CACJ;AAPD,qCAOC"}

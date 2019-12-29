@@ -4,12 +4,17 @@
   "description": "Dynamic tuning software library",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/skarukas/dynamic-tuning.git"
   },
+  "keywords": [],
+  "author": "Stephen Karukas <stephen.karukas@gmail.com>",
+  "license": "ISC",
+  "homepage": "https://github.com/skarukas/dynamic-tuning#readme",
   "devDependencies": {
     "@types/jest": "^24.0.24",
     "babel-cli": "^6.9.0",
@@ -38,8 +43,5 @@
       "preinstall": "echo Installing dependencies ...",
       "postinstall": "npm ls --depth 0"
     }
-  },
-  "author": "Stephen Karukas <stephen.karukas@gmail.com>",
-  "license": "ISC",
-  "homepage": "https://github.com/skarukas/dynamic-tuning#readme"
+  }
 }
