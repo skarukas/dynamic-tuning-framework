@@ -16,8 +16,8 @@ const Util = {
      * Calculate the next furthest integer away from zero.
      */
     absCeil: (n: number) => (n >= 0)? Math.ceil(n) : Math.floor(n),
-    ETToFreq: (pitch: number, base: number = 12) => Util.refA * 2**((pitch - 69) / base),
-    freqToET: (freq: number, base: number = 12) => base * Util.log2(freq / Util.refA) + 69,
+    ETToFreq: (pitch: number, base: number = 12) => Util.refA * 2**(pitch/base - 69/12),
+    freqToET: (freq: number, base: number = 12) => base * (Util.log2(freq / Util.refA) + 69/12),
     /**
      * Give the rational approximation of a number using continued fractions.
      * 

@@ -9,13 +9,14 @@ export default class Frequency extends Note {
     transposeBy(interval: Interval): void {
         this.freq *= interval.asFrequency().decimal();
     }
-    getETPitch(): number {
-        return Util.freqToET(this.freq);
+    getETPitch(base: number = 12): number {
+        return Util.freqToET(this.freq, base);
     }
     getFrequency(): number {
         return this.freq;
     }
     constructor(public freq: number) {
         super();
+        if (! (freq > 0)) throw new RangeError("Frequencies must be greater than zero.");
     }
 }

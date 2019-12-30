@@ -6,6 +6,10 @@ class ETPitch extends internal_1.Note {
         super();
         this.pitch = pitch;
         this.base = base;
+        if (isNaN(pitch / base))
+            throw new RangeError("ET pitch indices must be numeric.");
+        if (base == 0)
+            throw new RangeError("Cannot create an equal division of base zero.");
     }
     toString() {
         return `${this.pitch} [/${this.base}]`;
@@ -18,7 +22,7 @@ class ETPitch extends internal_1.Note {
         this.pitch += interval.asET(this.base).steps;
     }
     getETPitch(base = 12) {
-        return this.pitch * this.base / base;
+        return this.pitch * base / this.base;
     }
     getFrequency() {
         return internal_1.Util.ETToFreq(this.pitch, this.base);

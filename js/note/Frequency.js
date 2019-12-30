@@ -5,6 +5,8 @@ class Frequency extends internal_1.Note {
     constructor(freq) {
         super();
         this.freq = freq;
+        if (!(freq > 0))
+            throw new RangeError("Frequencies must be greater than zero.");
     }
     noteAbove(interval) {
         let copy = new Frequency(this.freq);
@@ -14,8 +16,8 @@ class Frequency extends internal_1.Note {
     transposeBy(interval) {
         this.freq *= interval.asFrequency().decimal();
     }
-    getETPitch() {
-        return internal_1.Util.freqToET(this.freq);
+    getETPitch(base = 12) {
+        return internal_1.Util.freqToET(this.freq, base);
     }
     getFrequency() {
         return this.freq;

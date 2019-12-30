@@ -1,4 +1,4 @@
-import { Interval, Util, FreqRatio, ET, ETInterval, JI } from "../index";
+import { Interval, Util, FreqRatio, ET, ETInterval, JI } from "../ts/index";
 
 // demonstrating the "error" of different EDOs in representing pure prime ratios
 

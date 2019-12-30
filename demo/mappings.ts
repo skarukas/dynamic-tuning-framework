@@ -19,5 +19,5 @@ let map2 = new ETMapping(19, 12);
 
 console.log("git em");
 for (let i = 60; i <= 72; i++) {
-    console.log(map2.get(i).asET()); // this doesn't seem right
+    console.log(map2.get(i).asET());
 }
