@@ -23,10 +23,10 @@ Another example demonstrating flexibility is stacking arbitrarily-measured inter
 let middleC = new MIDINote(60),
     justE = middleC.noteAbove(new FreqRatio(5, 4)),
     equalTemperedE = middleC.noteAbove(new ETInterval(4, 12)), // 4 semitones in 12-ET
-    nineteethToneE = middleC.noteAbove(new ETInterval(6, 19)), // 6 semitones in 19-ET
+    nineteenToneE = middleC.noteAbove(new ETInterval(6, 19)), // 6 semitones in 19-ET
     // calculate how much error the equal tempered E's have
     twelveError = justE.intervalTo(equalTemperedE).cents(),
-    nineteenError = justE.intervalTo(nineteethToneE).cents();
+    nineteenError = justE.intervalTo(nineteenToneE).cents();
     
 console.log(twelveError, nineteenError); // 13.69 -7.37
 ```
