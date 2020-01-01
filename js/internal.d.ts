@@ -23,4 +23,5 @@ import ET from "./interval-system/ET";
 import JI from "./interval-system/JI";
 import AdaptiveTuning from "./interval-system/AdaptiveTuning";
 import Scale from "./mapping/Scale";
+import "./static";
 export { Util, AbstractComponent as Component, Connectable, TreeComponent, ETInterval, FracInterval, FreqRatio, ET, JI, AdaptiveTuning, ETPitch, Note, NullNote, MIDINote, Frequency, Fraction, PitchCollection, Interval, IntervalTree, RootedIntervalTree, IntervalSystem, JustSystem, PitchedObj, IntervalStructure, Scale };

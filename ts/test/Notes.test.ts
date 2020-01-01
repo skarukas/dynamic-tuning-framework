@@ -1,4 +1,4 @@
-import * as tune from "../index";
+import * as tune from "..";
 
 let notes = [
         new tune.ETPitch(60), 

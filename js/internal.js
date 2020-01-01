@@ -49,4 +49,5 @@ const AdaptiveTuning_1 = __importDefault(require("./interval-system/AdaptiveTuni
 exports.AdaptiveTuning = AdaptiveTuning_1.default;
 const Scale_1 = __importDefault(require("./mapping/Scale"));
 exports.Scale = Scale_1.default;
+require("./static");
 //# sourceMappingURL=internal.js.map

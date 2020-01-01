@@ -7,7 +7,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const tune = __importStar(require("../index"));
+const tune = __importStar(require(".."));
 test("rounding works correctly", () => {
     for (let i = 0; i < 100; i++) {
         // random decimals (-500 <= n <= 500)

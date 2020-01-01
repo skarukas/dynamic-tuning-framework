@@ -1,6 +1,8 @@
 import { Note, Util, PitchedObj, Interval, ETInterval } from "../internal";
 
 export default class Scale {
+    static fiveLimit: Scale;
+
     /**
      * Number of MIDI pitches between each octave on the input device (must be an integer). Defaults to 12.
      */

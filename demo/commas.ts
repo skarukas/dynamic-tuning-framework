@@ -1,4 +1,4 @@
-import {FreqRatio, MIDINote, JI, Util, ET, Interval, ETInterval } from "../index";
+import {FreqRatio, MIDINote, JI, Util, ET, Interval, ETInterval } from "../ts";
 
 // commas
 let syntonic = new FreqRatio(81, 80),

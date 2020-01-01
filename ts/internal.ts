@@ -31,6 +31,8 @@ import AdaptiveTuning from "./interval-system/AdaptiveTuning"
 
 import Scale from "./mapping/Scale"
 
+import "./static"
+
 
 export {Util,
         AbstractComponent as Component, 

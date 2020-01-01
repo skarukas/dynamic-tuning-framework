@@ -12,7 +12,7 @@ class IntervalTree extends internal_1.IntervalStructure {
         let result = (root instanceof internal_1.NullNote) ? new IntervalTree(root) : new internal_1.RootedIntervalTree(root);
         let curr = root;
         for (let i = 0; i < base - 1; i++) {
-            curr = result.connect(curr, new internal_1.ETInterval(1, base));
+            curr = result.connectAbove(curr, new internal_1.ETInterval(1, base));
         }
         return result;
     }
@@ -32,7 +32,7 @@ class IntervalTree extends internal_1.IntervalStructure {
         for (let i of range) {
             if (i == 1)
                 fundamental.isStructural = false;
-            result.connect(result.root, new internal_1.FreqRatio(i));
+            result.connectAbove(result.root, new internal_1.FreqRatio(i));
         }
         return result;
     }
@@ -47,7 +47,7 @@ class IntervalTree extends internal_1.IntervalStructure {
     contains(note) {
         return this.getAllNotes().indexOf(note) != -1;
     }
-    connect(from, by) {
+    connectAbove(from, by) {
         if (this.contains(from)) {
             let newNote = from.noteAbove(by);
             this.addEdge(from, by, newNote);
@@ -56,6 +56,9 @@ class IntervalTree extends internal_1.IntervalStructure {
         else {
             return null;
         }
+    }
+    connectBelow(from, by) {
+        return this.connectAbove(from, by.inverse());
     }
     // doesn't work for pitch collections, only NullNotes
     inverse() {
@@ -87,7 +90,7 @@ class IntervalTree extends internal_1.IntervalStructure {
                 if (!visited.get(neighbor)) {
                     // add the current interval to get the next note
                     let currInterval = this.getInterval(c1, neighbor);
-                    let next = result.connect(c2, currInterval);
+                    let next = result.connectAbove(c2, currInterval);
                     thisQueue.unshift(neighbor);
                     resultQueue.unshift(next);
                 }

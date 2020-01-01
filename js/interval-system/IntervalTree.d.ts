@@ -1,6 +1,8 @@
 import { IntervalStructure, Interval, Note, RootedIntervalTree } from "../internal";
 export default class IntervalTree extends IntervalStructure {
     root: Note;
+    static chromaticFiveLimit: IntervalTree;
+    static diatonicFiveLimit: IntervalTree;
     constructor(root?: Note);
     static ET(base: number, root?: Note): IntervalTree;
     /**
@@ -13,7 +15,8 @@ export default class IntervalTree extends IntervalStructure {
     getAllNotes(): Note[];
     addEdge(from: Note, by: Interval, to: Note): void;
     contains(note: Note): boolean;
-    connect(from: Note, by: Interval): Note;
+    connectAbove(from: Note, by: Interval): Note;
+    connectBelow(from: Note, by: Interval): Note;
     inverse(): IntervalTree;
     private getNeighbors;
     private getInterval;

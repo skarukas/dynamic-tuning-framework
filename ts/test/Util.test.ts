@@ -1,4 +1,4 @@
-import * as tune from "../index";
+import * as tune from "..";
 
 test("rounding works correctly",() => {
     for (let i = 0; i < 100; i++) {

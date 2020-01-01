@@ -1,14 +1,13 @@
-import { IntervalTree, NullNote, JI, ETPitch, Frequency, AdaptiveTuning, ET } from "../index";
-import { MIDINote } from "../src/internal";
+import { IntervalTree, NullNote, JI, ETPitch, Frequency, AdaptiveTuning, ET, MIDINote } from "../ts/index";
 
 let a = new NullNote();
 
 // create "abstract" interval structure of a justly-tuned dominant-9 chord
 let dom9 = new IntervalTree(a),
-    b = dom9.connect(a, JI.third),
-    c = dom9.connect(a, JI.fifth),
-    d = dom9.connect(a, JI.seventh),
-    e = dom9.connect(c, JI.fifth);
+    b = dom9.connectAbove(a, JI.third),
+    c = dom9.connectAbove(a, JI.fifth),
+    d = dom9.connectAbove(a, JI.seventh),
+    e = dom9.connectAbove(c, JI.fifth);
 
 // apply transposition and inversion
 let A9 = dom9.withRoot(new ETPitch(69)),
@@ -40,3 +39,4 @@ console.log(thirteen);
 console.log(thirteen2); */
 console.log(tree);
 console.log(fourThroughSeven.getAllNotes())
+console.log(IntervalTree.chromaticFiveLimit.withRoot(new ETPitch(60)).getAllNotes())

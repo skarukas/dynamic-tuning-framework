@@ -1,7 +1,9 @@
-import {IntervalStructure, NullNote, Interval, FreqRatio, ETInterval, Note, RootedIntervalTree, Util, Frequency} from "../internal";
+import {IntervalStructure, NullNote, Interval, FreqRatio, ETInterval, Note, RootedIntervalTree, Util, Frequency, Scale, JI} from "../internal";
 
 // seperate class for non-null notes?
 export default class IntervalTree extends IntervalStructure {
+    static chromaticFiveLimit: IntervalTree;
+    static diatonicFiveLimit: IntervalTree;
     constructor(public root: Note = new NullNote()) { 
         super();
         this.edges.set(root, new Map<Note, Interval>());
@@ -12,7 +14,7 @@ export default class IntervalTree extends IntervalStructure {
         let curr = root;
 
         for (let i = 0; i < base - 1; i++) {
-            curr = result.connect(curr, new ETInterval(1, base));
+            curr = result.connectAbove(curr, new ETInterval(1, base));
         }
         return result;
     }
@@ -32,7 +34,7 @@ export default class IntervalTree extends IntervalStructure {
 
         for (let i of range) {
             if (i == 1) fundamental.isStructural = false;
-            result.connect(result.root, new FreqRatio(i));
+            result.connectAbove(result.root, new FreqRatio(i));
         }
         return result; 
     }
@@ -47,14 +49,17 @@ export default class IntervalTree extends IntervalStructure {
     contains(note: Note): boolean {
         return this.getAllNotes().indexOf(note) != -1;
     }
-    connect(from: Note, by: Interval): Note {
+    connectAbove(from: Note, by: Interval): Note {
         if (this.contains(from)) {
             let newNote = from.noteAbove(by);
             this.addEdge(from, by, newNote);
             return newNote;
         } else {
-            return null;
+            throw new Error("Cannot connect from a note not in tree.");
         }
+    }
+    connectBelow(from: Note, by: Interval): Note {
+        return this.connectAbove(from, by.inverse());
     }
     // doesn't work for pitch collections, only NullNotes
     inverse(): IntervalTree {
@@ -93,7 +98,7 @@ export default class IntervalTree extends IntervalStructure {
                 if (!visited.get(neighbor)) {
                     // add the current interval to get the next note
                     let currInterval = this.getInterval(c1, neighbor);
-                    let next = result.connect(c2, currInterval);
+                    let next = result.connectAbove(c2, currInterval);
                     thisQueue.unshift(neighbor);
                     resultQueue.unshift(next);
                 }

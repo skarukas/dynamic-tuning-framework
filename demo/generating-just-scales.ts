@@ -1,4 +1,4 @@
-import { ETPitch, FreqRatio, Note, Interval } from "../index";
+import { ETPitch, FreqRatio, Note, Interval } from "../ts/index";
 
 let C = ETPitch.middleC;
 

@@ -7,7 +7,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const tune = __importStar(require("../index"));
+const tune = __importStar(require(".."));
 test("Set pitches for middle C, A440, and 0", () => {
     expect(tune.Util.ETToFreq(69)).toBeCloseTo(440);
     expect(tune.Util.ETToFreq(60)).toBeCloseTo(261.63);

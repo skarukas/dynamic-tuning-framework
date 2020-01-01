@@ -1,4 +1,4 @@
-import * as tune from "../index";
+import * as tune from "..";
 
 test("Set pitches for middle C, A440, and 0",() => {
     expect(tune.Util.ETToFreq(69)).toBeCloseTo(440);
