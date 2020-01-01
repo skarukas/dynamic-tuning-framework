@@ -10,11 +10,17 @@ declare const Util: {
     mod: (n: number, base: number) => number;
     powerMod: (n: number, base: number) => number;
     /**
+     * Calculate the quotient and remainder when dividing two numbers
+     * @returns A pair with the form `[quotient, remainder]`
+     */
+    divide: (n: number, d: number) => [number, number];
+    /**
      * Calculate the next furthest integer away from zero.
      */
     absCeil: (n: number) => number;
     ETToFreq: (pitch: number, base?: number) => number;
     freqToET: (freq: number, base?: number) => number;
+    isValidIndex: (index: number, length: number) => boolean;
     /**
      * Give the rational approximation of a number using continued fractions.
      *

@@ -28,7 +28,7 @@ class FreqRatio extends internal_1.FracInterval {
         return new FreqRatio(remainder);
     }
     multiply(factor) {
-        return new FreqRatio(Math.pow(this.n, factor), this.d);
+        return new FreqRatio(Math.pow(this.n, factor), Math.pow(this.d, factor));
     }
     asFrequency() { return this; }
     asET(base = 12) {

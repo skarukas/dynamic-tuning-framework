@@ -15,11 +15,17 @@ const Util = {
     mod: (n, base) => ((n % base) + base) % base,
     powerMod: (n, base) => Math.pow(base, (Util.mod(Util.log(n, base), 1))),
     /**
+     * Calculate the quotient and remainder when dividing two numbers
+     * @returns A pair with the form `[quotient, remainder]`
+     */
+    divide: (n, d) => [Math.floor(n / d), Util.mod(n, d)],
+    /**
      * Calculate the next furthest integer away from zero.
      */
     absCeil: (n) => (n >= 0) ? Math.ceil(n) : Math.floor(n),
     ETToFreq: (pitch, base = 12) => Util.refA * Math.pow(2, (pitch / base - 69 / 12)),
     freqToET: (freq, base = 12) => base * (Util.log2(freq / Util.refA) + 69 / 12),
+    isValidIndex: (index, length) => (index >= 0) && (Util.mod(index, 1) == 0) && (index < length),
     /**
      * Give the rational approximation of a number using continued fractions.
      *

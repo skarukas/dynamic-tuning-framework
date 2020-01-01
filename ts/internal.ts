@@ -29,9 +29,7 @@ import ET from "./interval-system/ET"
 import JI from "./interval-system/JI"
 import AdaptiveTuning from "./interval-system/AdaptiveTuning"
 
-import Mapping from "./mapping/Mapping"
-  import ETMapping from "./mapping/ETMapping"
-  import Scale from "./mapping/Scale"
+import Scale from "./mapping/Scale"
 
 
 export {Util,
@@ -58,6 +56,4 @@ export {Util,
         JustSystem,
         PitchedObj,
         IntervalStructure,
-        Mapping,
-        ETMapping,
         Scale}

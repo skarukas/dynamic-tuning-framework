@@ -1,14 +1,29 @@
-import { Mapping, Note, Util, PitchedObj, Interval, ETPitch, FreqRatio, ETInterval } from "../internal";
+import { Note, Util, PitchedObj, Interval, ETInterval } from "../internal";
 
-export default class Scale extends Mapping {
+export default class Scale {
+    /**
+     * Number of MIDI pitches between each octave on the input device (must be an integer). Defaults to 12.
+     */
+    readonly notesPerOctave: number;
+    /**
+     * Interval between each repetition of the scale. Defaults to an octave.
+     */
+    readonly octaveSize: Interval;
+    /**
+     * The input note at which to begin the scale. Any integer equivalent mod `notesPerOctave` will produce the same result.
+     */
+    private root = 60;
+    private fixedInput = 60;
+    private fixedOutput: Note;
+    private map: Interval[];
+
     constructor(notesPerOctave: number = 12, octaveSize: Interval = Interval.octave, middleCPitch: Note = Note.middleC.asET(notesPerOctave)) {
-        super(notesPerOctave, octaveSize);
-
+        this.octaveSize = octaveSize;
+        this.notesPerOctave = notesPerOctave;
         this.map = new Array(notesPerOctave);
         this.equallyDivide();
         this.setRoot(60);
         this.setFixedMapping(60, middleCPitch);
-        //this.fixedOutput = (new ETPitch(this.zero)).asET(this.notesPerOctave);
     }
     /**
      * Transposes the entire scale to map `input` to `output`. Does not alter the scale's interval content.
@@ -35,8 +50,6 @@ export default class Scale extends Mapping {
             step = this.octaveSize.equals(Interval.octave)? new ETInterval(1, base) : this.octaveSize.divide(base).asET(base);
         for (let i = 0; i < base; i++) this.map[i] = step.multiply(i);
     }
-
-    map: Interval[];
 
     getIntervalByScaleIndex(index: number): Interval {
         let valid = Util.isValidIndex(index, this.notesPerOctave);

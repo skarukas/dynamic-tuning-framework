@@ -11,6 +11,4 @@ export {ETPitch,
         IntervalTree,
         AdaptiveTuning,
         Note,
-        Scale,
-        ETMapping,
-        Mapping } from "./internal";
+        Scale} from "./internal";
