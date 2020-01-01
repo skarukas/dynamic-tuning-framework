@@ -1,14 +1,14 @@
 import { Mapping, ETPitch, ETInterval, Interval, Util, Note } from "../internal";
 
 export default class ETMapping extends Mapping {
-    protected getIntervalByIndex(key: number): Interval {
+    protected getIntervalByScaleIndex(key: number): Interval {
         // if base is less than the number of playable steps, repeat them 
         let scaledKey = Math.round(key * this.base / this.notesPerOctave);
         return new ETInterval(scaledKey, this.base);
     }
     constructor(private base: number, notesPerOctave: number = 12) { 
         super(notesPerOctave);
-        this.zeroNote = (new ETPitch(this.zero)).asET(this.base);
+        this.fixedOutput = (new ETPitch(this.fixedInput)).asET(this.base);
     }
 
     /*

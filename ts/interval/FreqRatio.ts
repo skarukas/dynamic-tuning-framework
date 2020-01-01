@@ -28,7 +28,7 @@ export default class FreqRatio extends FracInterval {
         return new FreqRatio(remainder);
     }
     multiply(factor: number): FreqRatio {
-        return new FreqRatio(this.n ** factor, this.d);
+        return new FreqRatio(this.n ** factor, this.d ** factor);
     }
     asFrequency(): FreqRatio { return this; }
     asET(base: number = 12): ETInterval {

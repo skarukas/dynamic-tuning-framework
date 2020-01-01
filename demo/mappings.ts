@@ -1,6 +1,6 @@
-import { ScaleMapping, FreqRatio, ETPitch, ETMapping } from "../ts/index";
+import { Scale, FreqRatio, ETPitch, ETMapping, ET } from "../ts/index";
 
-let map = new ScaleMapping(12);
+let map = new Scale(12);
 
 console.log(map); // 12-ET
 
@@ -20,4 +20,14 @@ let map2 = new ETMapping(19, 12);
 console.log("git em");
 for (let i = 60; i <= 72; i++) {
     console.log(map2.get(i).asET());
+}
+
+// how many notes per octave, and how big the octave is
+let scale = new Scale(19);
+
+console.log(scale)
+
+console.log("git em");
+for (let i = 60; i <= 72; i++) {
+    console.log(scale.get(i));
 }

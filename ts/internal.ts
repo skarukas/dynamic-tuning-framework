@@ -31,7 +31,7 @@ import AdaptiveTuning from "./interval-system/AdaptiveTuning"
 
 import Mapping from "./mapping/Mapping"
   import ETMapping from "./mapping/ETMapping"
-  import ScaleMapping from "./mapping/ScaleMapping"
+  import Scale from "./mapping/Scale"
 
 
 export {Util,
@@ -60,4 +60,4 @@ export {Util,
         IntervalStructure,
         Mapping,
         ETMapping,
-        ScaleMapping}
+        Scale}
