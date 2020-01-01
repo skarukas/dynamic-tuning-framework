@@ -1,4 +1,4 @@
-import { Scale, FreqRatio, ETPitch, ETMapping, ET } from "../ts/index";
+import { Scale, FreqRatio, ETPitch, ETMapping, ET, ETInterval, JI } from "../ts/index";
 
 let map = new Scale(12);
 
@@ -23,7 +23,13 @@ for (let i = 60; i <= 72; i++) {
 }
 
 // how many notes per octave, and how big the octave is
-let scale = new Scale(19);
+let scale = new Scale();
+
+scale.set(4, JI.third)
+    .set(10, JI.seventh)
+    .set(6, JI.eleventh)
+    .setFixedMapping(6, new ETPitch(6))
+    .setRoot(60)
 
 console.log(scale)
 

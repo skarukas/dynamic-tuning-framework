@@ -15,18 +15,20 @@ export default class Scale extends Mapping {
      * @param input 
      * @param output 
      */
-    setFixedMapping(input: number, output: Note): void {
+    setFixedMapping(input: number, output: Note): Scale {
         // Transpose `input` and `output`  down until `input` is an index in the scale range
         let [numOctaves, index] = Util.divide(input, this.notesPerOctave);
         this.fixedInput = index;
         this.fixedOutput = output.noteBelow(this.octaveSize.multiply(numOctaves));
+        return this;
     }
     /**
      * Set the input note at which to begin the scale. Any integer equivalent mod `notesPerOctave` will produce the same result.
      */
-    setRoot(root: number): void {
+    setRoot(root: number): Scale {
         if (!Number.isInteger(root)) throw new RangeError("Input values must be integers.");
         this.root = Util.mod(root, this.notesPerOctave);
+        return this;
     }
     private equallyDivide(): void {
         let base = this.notesPerOctave,
@@ -62,7 +64,7 @@ export default class Scale extends Mapping {
      * @param index An integer (MIDI pitch) that will map to `value`.
      * @param value May be specified as an `Interval` above the root or as a `Note`, whose difference from middle C is used.
      */
-    set(index: number, value: PitchedObj): void {
+    set(index: number, value: PitchedObj): Scale {
         // get index within input scale
         let modIndex = Util.mod(index - this.root, this.notesPerOctave),
             // create interval from the root note (if not already an interval)
@@ -71,6 +73,7 @@ export default class Scale extends Mapping {
         if (modIndex == 0) throw new Error("Can't change the root of a mapping");
         // resize interval to be within scale range and set value
         this.map[modIndex] = interval.mod(this.octaveSize);
+        return this;
     }
     toString(): string {
         return this.map.toString();
