@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const internal_1 = require("../internal");
 // Intervals are generally meant to be immutable
-class Interval {
+class Interval extends internal_1.PitchedObj {
     // static comparison functions
     static compareSize(_a, _b) {
         let a = _a.asET(), b = _b.asET();
@@ -26,9 +26,6 @@ class Interval {
     }
     cents() {
         return internal_1.Util.round(this.asET().steps * 100, 2);
-    }
-    equals(other) {
-        return this.cents() - other.cents() < 1E-2;
     }
     errorInET(base = 12) {
         let et = this.getNearestET(base);

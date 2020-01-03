@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const internal_1 = require("../internal");
-class Note {
+class Note extends internal_1.PitchedObj {
     constructor() {
+        super(...arguments);
         this.isStructural = false; // structural notes are not played back and exist purely to give structure to the pitch tree
     }
     /**
@@ -21,6 +22,7 @@ class Note {
             return pitch >= lo && pitch <= hi;
         };
     }
+    // not sure about this
     getAllNotes() {
         return [this];
     }

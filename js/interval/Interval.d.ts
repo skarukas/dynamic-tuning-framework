@@ -1,5 +1,5 @@
 import { PitchedObj, FreqRatio, ETInterval } from "../internal";
-export default abstract class Interval implements PitchedObj {
+export default abstract class Interval extends PitchedObj {
     static octave: FreqRatio;
     static compareSize(_a: Interval, _b: Interval): number;
     static compareComplexity(_a: Interval, _b: Interval): number;
@@ -16,7 +16,6 @@ export default abstract class Interval implements PitchedObj {
     abstract asFrequency(): FreqRatio;
     abstract asET(base?: number): ETInterval;
     cents(): number;
-    equals(other: Interval): boolean;
     errorInET(base?: number): number;
     getNearestET(base?: number): ETInterval;
 }

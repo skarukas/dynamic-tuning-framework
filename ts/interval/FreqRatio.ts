@@ -3,6 +3,7 @@ import { FracInterval, Util, Fraction, ETInterval, Interval } from "../internal"
 export default class FreqRatio extends FracInterval {
     // FreqRatio methods
     constructor(n: number, d: number = 1) {
+        if (! (n > 0 && d > 0)) throw new RangeError("Frequency ratios must be positive.");
         // simplify ratio
         if (n % 1 || d % 1) {
             [n, d] = Util.dtf(n / d);
@@ -28,6 +29,7 @@ export default class FreqRatio extends FracInterval {
         return new FreqRatio(remainder);
     }
     multiply(factor: number): FreqRatio {
+        if (isNaN(factor)) throw new RangeError("Factors must be numeric.");
         return new FreqRatio(this.n ** factor, this.d ** factor);
     }
     asFrequency(): FreqRatio { return this; }

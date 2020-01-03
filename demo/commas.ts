@@ -30,3 +30,5 @@ let middleC = new MIDINote(60),
     nineteenError = justE.intervalTo(nineteethToneE).cents();
 
 console.log(twelveError, nineteenError); // 
+
+console.log(ET.stepSizeForET(19));

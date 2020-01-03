@@ -4,6 +4,8 @@ const internal_1 = require("../internal");
 class FreqRatio extends internal_1.FracInterval {
     // FreqRatio methods
     constructor(n, d = 1) {
+        if (!(n > 0 && d > 0))
+            throw new RangeError("Frequency ratios must be positive.");
         // simplify ratio
         if (n % 1 || d % 1) {
             [n, d] = internal_1.Util.dtf(n / d);
@@ -28,6 +30,8 @@ class FreqRatio extends internal_1.FracInterval {
         return new FreqRatio(remainder);
     }
     multiply(factor) {
+        if (isNaN(factor))
+            throw new RangeError("Factors must be numeric.");
         return new FreqRatio(Math.pow(this.n, factor), Math.pow(this.d, factor));
     }
     asFrequency() { return this; }

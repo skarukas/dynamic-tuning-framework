@@ -1,6 +1,4 @@
-import * as tune from "..";
 import { IntervalTree, ETPitch, ETInterval, FreqRatio } from "../internal";
-import ET from "../interval-system/ET";
 
 test("Connecting returns the new note",() => {
     let root = new ETPitch(10),

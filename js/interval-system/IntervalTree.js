@@ -54,7 +54,7 @@ class IntervalTree extends internal_1.IntervalStructure {
             return newNote;
         }
         else {
-            return null;
+            throw new Error("Cannot connect from a note not in tree.");
         }
     }
     connectBelow(from, by) {

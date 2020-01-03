@@ -1,5 +1,5 @@
 import { Connectable, PitchedObj, Interval, Frequency, ETPitch, Component } from "../internal";
-export default abstract class Note implements Connectable, PitchedObj {
+export default abstract class Note extends PitchedObj implements Connectable {
     static middleC: ETPitch;
     id: string;
     isStructural: boolean;

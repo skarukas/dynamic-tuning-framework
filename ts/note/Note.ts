@@ -1,6 +1,7 @@
 import { Connectable, PitchedObj, Interval, FreqRatio, Frequency, ETPitch, MIDINote, Component, TreeComponent } from "../internal";
 
-export default abstract class Note implements Connectable, PitchedObj {
+
+export default abstract class Note extends PitchedObj implements Connectable {
     static middleC: ETPitch;
     id: string; // for non-unique identification independent from actual pitch/freq, such as letter note name
     isStructural: boolean = false; // structural notes are not played back and exist purely to give structure to the pitch tree
@@ -20,6 +21,8 @@ export default abstract class Note implements Connectable, PitchedObj {
             return pitch >= lo && pitch <= hi;
         };
     }
+    
+    // not sure about this
     getAllNotes(): Note[] {
         return [this];
     }
@@ -74,3 +77,4 @@ export default abstract class Note implements Connectable, PitchedObj {
         return result.connect(other, by);
     }
 }
+

@@ -6,6 +6,10 @@ class ETInterval extends internal_1.FracInterval {
         super(steps, base);
         this.steps = steps;
         this.base = base;
+        if (isNaN(steps / base))
+            throw new RangeError("ET pitch indices must be numeric.");
+        if (base == 0)
+            throw new RangeError("Cannot create an equal division of base zero.");
     }
     valueOf() {
         return `${this.n} [${this.d}ET]`;
@@ -15,6 +19,8 @@ class ETInterval extends internal_1.FracInterval {
         return new ETInterval(remainder, this.d);
     }
     multiply(factor) {
+        if (isNaN(factor))
+            throw new RangeError("Factors must be numeric.");
         return new ETInterval(this.n * factor, this.d);
     }
     asFrequency() {

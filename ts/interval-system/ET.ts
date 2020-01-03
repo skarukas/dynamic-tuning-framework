@@ -1,5 +1,8 @@
-import { PitchedObj } from "../internal";
+import { PitchedObj, ETInterval } from "../internal";
 
+/**
+ * Higher level functions for dealing with equal-tempered collections.
+ */
 const ET = {
     /**
      * Generate the equally divided (n-ET) scale that best approximates the given `Interval` or `Notes`.
@@ -10,7 +13,7 @@ const ET = {
      * 
      * @return The ET base whose scale best approximates the given pitch(es).
      */
-    bestFitET: (pitched: PitchedObj[] | PitchedObj,  maxBase = 53): number => {
+    bestFitET(pitched: PitchedObj[] | PitchedObj,  maxBase = 53): number {
         if (!(pitched instanceof Array)) pitched = [pitched];
 
         let best = 0,
@@ -35,7 +38,7 @@ const ET = {
      * 
      * @return An array of ET bases, sorted by the degree to which they fit the input.
      */
-    bestFitETs: (pitched: PitchedObj[] | PitchedObj,  maxBase = 53, howMany = 10): number[] => {
+    bestFitETs(pitched: PitchedObj[] | PitchedObj,  maxBase = 53, howMany = 10): number[] {
         if (!(pitched instanceof Array)) pitched = [pitched];
         if (howMany < 1) howMany = maxBase;
 
@@ -57,7 +60,7 @@ const ET = {
      * 
      * @returns The mean error in cents.
      */
-    errorInET: (pitched: PitchedObj[] | PitchedObj, base: number = 12, metric = "rms"): number => {
+    errorInET(pitched: PitchedObj[] | PitchedObj, base: number = 12, metric = "rms"): number {
         if (!(pitched instanceof Array)) pitched = [pitched];
         let sum = 0;
         metric = metric.toLowerCase();
@@ -69,6 +72,12 @@ const ET = {
             for (let pitch of pitched) sum += Math.abs(pitch.errorInET(base));
         }
         return sum / pitched.length;
+    },
+    /**
+     * Calculates the step size in cents for an equal division of the octave.
+     */
+    stepSizeForET(base: number): number {
+        return (new ETInterval(1, base)).cents();
     }
 }
 

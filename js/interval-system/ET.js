@@ -1,5 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const internal_1 = require("../internal");
+/**
+ * Higher level functions for dealing with equal-tempered collections.
+ */
 const ET = {
     /**
      * Generate the equally divided (n-ET) scale that best approximates the given `Interval` or `Notes`.
@@ -10,7 +14,7 @@ const ET = {
      *
      * @return The ET base whose scale best approximates the given pitch(es).
      */
-    bestFitET: (pitched, maxBase = 53) => {
+    bestFitET(pitched, maxBase = 53) {
         if (!(pitched instanceof Array))
             pitched = [pitched];
         let best = 0, minError = Infinity;
@@ -33,7 +37,7 @@ const ET = {
      *
      * @return An array of ET bases, sorted by the degree to which they fit the input.
      */
-    bestFitETs: (pitched, maxBase = 53, howMany = 10) => {
+    bestFitETs(pitched, maxBase = 53, howMany = 10) {
         if (!(pitched instanceof Array))
             pitched = [pitched];
         if (howMany < 1)
@@ -56,7 +60,7 @@ const ET = {
      *
      * @returns The mean error in cents.
      */
-    errorInET: (pitched, base = 12, metric = "rms") => {
+    errorInET(pitched, base = 12, metric = "rms") {
         if (!(pitched instanceof Array))
             pitched = [pitched];
         let sum = 0;
@@ -71,6 +75,12 @@ const ET = {
                 sum += Math.abs(pitch.errorInET(base));
         }
         return sum / pitched.length;
+    },
+    /**
+     * Calculates the step size in cents for an equal division of the octave.
+     */
+    stepSizeForET(base) {
+        return (new internal_1.ETInterval(1, base)).cents();
     }
 };
 exports.default = ET;

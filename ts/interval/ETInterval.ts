@@ -10,10 +10,13 @@ export default class ETInterval extends FracInterval {
         return new ETInterval(remainder, this.d);
     }
     multiply(factor: number): Interval {
+        if (isNaN(factor)) throw new RangeError("Factors must be numeric.");
         return new ETInterval(this.n * factor, this.d);
     }
     constructor(public readonly steps: number, public readonly base: number = 12) {
         super(steps, base);
+        if (isNaN(steps/base)) throw new RangeError("ET pitch indices must be numeric.");
+        if (base == 0) throw new RangeError("Cannot create an equal division of base zero.");
     }
     asFrequency(): FreqRatio {
         let decimal: number = 2 ** (this.steps / this.base);

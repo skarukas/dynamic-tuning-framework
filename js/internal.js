@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Util_1 = __importDefault(require("./Util"));
 exports.Util = Util_1.default;
+const PitchedObj_1 = __importDefault(require("./note/PitchedObj"));
+exports.PitchedObj = PitchedObj_1.default;
 const Note_1 = __importDefault(require("./note/Note"));
 exports.Note = Note_1.default;
 const NullNote_1 = __importDefault(require("./note/NullNote"));

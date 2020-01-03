@@ -1,4 +1,7 @@
 import { PitchedObj } from "../internal";
+/**
+ * Higher level functions for dealing with equal-tempered collections.
+ */
 declare const ET: {
     /**
      * Generate the equally divided (n-ET) scale that best approximates the given `Interval` or `Notes`.
@@ -9,7 +12,7 @@ declare const ET: {
      *
      * @return The ET base whose scale best approximates the given pitch(es).
      */
-    bestFitET: (pitched: PitchedObj | PitchedObj[], maxBase?: number) => number;
+    bestFitET(pitched: PitchedObj | PitchedObj[], maxBase?: number): number;
     /**
      * Generate the equally divided (n-ET) scales that best approximate the given `Interval` or `Notes`.
      * `Notes` are compared to a fixed scale beginning on C, `MIDIPitch(0)`.
@@ -20,7 +23,7 @@ declare const ET: {
      *
      * @return An array of ET bases, sorted by the degree to which they fit the input.
      */
-    bestFitETs: (pitched: PitchedObj | PitchedObj[], maxBase?: number, howMany?: number) => number[];
+    bestFitETs(pitched: PitchedObj | PitchedObj[], maxBase?: number, howMany?: number): number[];
     /**
      * Calculate the mean error of a set of pitches compared to `base`-ET.
      * `Notes` are compared to a fixed scale beginning on C, `MIDIPitch(0)`.
@@ -30,6 +33,10 @@ declare const ET: {
      *
      * @returns The mean error in cents.
      */
-    errorInET: (pitched: PitchedObj | PitchedObj[], base?: number, metric?: string) => number;
+    errorInET(pitched: PitchedObj | PitchedObj[], base?: number, metric?: string): number;
+    /**
+     * Calculates the step size in cents for an equal division of the octave.
+     */
+    stepSizeForET(base: number): number;
 };
 export default ET;

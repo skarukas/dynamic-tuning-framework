@@ -50,4 +50,22 @@ test("Can't create NaN ET fractions", () => {
     expect(() => new tune.ETPitch(45, NaN)).toThrow();
     expect(() => new tune.ETPitch(NaN, NaN)).toThrow();
 });
+test("Note equality is different than object equality", () => {
+    let a = new tune.ETPitch(40), aCopy = new tune.ETPitch(40), b = new tune.Frequency(400), bCopy = new tune.Frequency(400);
+    expect(a).not.toBe(aCopy);
+    expect(a.equals(aCopy)).toBe(true);
+    expect(a == aCopy).toBe(false);
+    expect(b).not.toBe(bCopy);
+    expect(b.equals(bCopy)).toBe(true);
+    expect(b == bCopy).toBe(false);
+});
+test("transposing mutates and getting a note above does not", () => {
+    let a = new tune.ETPitch(40), aTrans = new tune.ETPitch(41), b = new tune.Frequency(400), bTrans = new tune.Frequency(600);
+    expect(a).not.toEqual(aTrans);
+    a.transposeBy(new tune.ETInterval(1));
+    expect(a).toEqual(aTrans);
+    expect(b).not.toEqual(bTrans);
+    b.transposeBy(tune.JI.fifth);
+    expect(b).toEqual(bTrans);
+});
 //# sourceMappingURL=Notes.test.js.map
