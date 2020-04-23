@@ -1,13 +1,6 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const tune = __importStar(require(".."));
+const tune = require("..");
 test("Set pitches for middle C, A440, and 0", () => {
     expect(tune.Util.ETToFreq(69)).toBeCloseTo(440);
     expect(tune.Util.ETToFreq(60)).toBeCloseTo(261.63);

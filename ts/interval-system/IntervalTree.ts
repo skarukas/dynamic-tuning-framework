@@ -2,13 +2,24 @@ import {IntervalStructure, NullNote, Interval, FreqRatio, ETInterval, Note, Root
 
 // seperate class for non-null notes?
 export default class IntervalTree extends IntervalStructure {
+
+    /** An unrooted chromatic just scale built with thirds and fifths. */
     static chromaticFiveLimit: IntervalTree;
+
+    /** An unrooted diatonic just scale built with thirds and fifths. */
     static diatonicFiveLimit: IntervalTree;
+
     constructor(public root: Note = new NullNote()) { 
         super();
         this.edges.set(root, new Map<Note, Interval>());
     }
 
+    /**
+     * Generate an ET scale as an `IntervalTree`, connected like a linked list.
+     * 
+     * @param base The number of divisions per octave.
+     * @param root The `Note` upon which to start the scale. The default value is a `NullNote`, which creates a purely structural `IntervalTree`.
+     */
     static ET(base: number, root: Note = new NullNote()): IntervalTree { 
         let result = (root instanceof NullNote)? new IntervalTree(root) : new RootedIntervalTree(root);
         let curr = root;
@@ -18,6 +29,7 @@ export default class IntervalTree extends IntervalStructure {
         }
         return result;
     }
+
     /**
      * Generate a set of partials from the harmonic series.
      * 
@@ -38,17 +50,40 @@ export default class IntervalTree extends IntervalStructure {
         }
         return result; 
     }
+
     getAllNotes(): Note[] {
         return Array.from(this.edges.keys());
     }
+
     addEdge(from: Note, by: Interval, to: Note): void {
         this.edges.get(from).set(to, by);
         this.edges.set(to, new Map<Note, Interval>());
         this.edges.get(to).set(from, by.inverse());
     }
+
+    /**
+     * Check if the `IntervalTree` contains the specified `Note`, either by reference or by frequency value.
+     * 
+     * @param note The `Note` to search for.
+     */
     contains(note: Note): boolean {
-        return this.getAllNotes().indexOf(note) != -1;
+        // check by reference
+        if (this.getAllNotes().indexOf(note) != -1) return true;
+
+        // check by frequency value
+        for (let n of this.getAllNotes()) {
+            if (n.equals(note)) return true;
+        }
+        return false;
     }
+
+    /**
+     * Create a new `Note` a certain interval from a note already in the tree, and add it.
+     * 
+     * @param from The `Note` to connect from
+     * @param by The `Interval` to connect by
+     * @returns The newly created `Note`.
+     */
     connectAbove(from: Note, by: Interval): Note {
         if (this.contains(from)) {
             let newNote = from.noteAbove(by);

@@ -1,6 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const internal_1 = require("../internal");
+/**
+ * An representation of an interval as a frequency ratio.
+ *
+ * *immutable*
+ */
 class FreqRatio extends internal_1.FracInterval {
     // FreqRatio methods
     constructor(n, d = 1) {
@@ -12,13 +17,23 @@ class FreqRatio extends internal_1.FracInterval {
         }
         super(n, d);
     }
+    /** The frequency ratio, e.g. "3:2", */
+    get name() {
+        return this.__name__ || this.n + ":" + this.d;
+    }
+    /** or a custom name. */
+    set name(val) { this.__name__ = val; }
+    /** Creates a `FreqRatio` from a `Fraction`. */
     static fromFraction(frac) {
         return new FreqRatio(frac.n, frac.d);
     }
+    /** Returns the largest prime number involved in the ratio. */
     largestPrimeFactor() {
+        // turn it into a ratio of integers
         let norm = this.normalized();
         return internal_1.Util.largestPrimeFactor(norm.n * norm.d);
     }
+    /** Return the frequency ratio as a decimal. */
     decimal() {
         return this.frac.decimal();
     }

@@ -1,13 +1,6 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const tune = __importStar(require(".."));
+const tune = require("..");
 test("rounding works correctly", () => {
     for (let i = 0; i < 100; i++) {
         // random decimals (-500 <= n <= 500)
@@ -43,7 +36,7 @@ test("the number of primes up to n is within bounds", () => {
     }
 });
 // reset prime array
-tune.Util.__primes = [];
+tune.Util.__primes__ = [];
 test("correct primes are generated for small numbers", () => {
     expect(tune.Util.primesUpTo(0)).toEqual([]);
     expect(tune.Util.primesUpTo(1)).toEqual([]);
@@ -53,7 +46,7 @@ test("correct primes are generated for small numbers", () => {
     expect(tune.Util.primesUpTo(100)).toEqual([2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]);
 });
 // reset prime array
-tune.Util.__primes = [];
+tune.Util.__primes__ = [];
 test("prime array for decimals is same as floor", () => {
     for (let i = 0; i < 100; i++) {
         let n = Math.random() * 3000 + 55;

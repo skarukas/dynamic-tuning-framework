@@ -9,7 +9,7 @@ export default abstract class AbstractComponent implements Connectable {
     abstract remove(v: Note): boolean;
     getRoot(): Note;
     getAllNotes(): Note[];
-    getNoteById(id: string): Note;
+    getNoteByName(name: string): Note;
     transposeBy(interval: Interval): void;
     filter(callback: (Note: any) => boolean): Note[];
 }

@@ -1,15 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const internal_1 = require("../internal");
+/** Namespace for methods that perform various types of adaptive tuning operations. */
 const AdaptiveTuning = {
+    /*
+    // ====== Timbre-based Analysis ======
     currTimbre: null,
-    calculateDissonance(notes) {
-        /*
-            assuming it's practical to implement sethares's algorithm
-        */
+
+    calculateDissonance(notes: Note[]) {
+        // assuming it's practical to implement sethares's algorithm
     },
+    */
     /**
-     * Finds the subset of the harmonic series that most closely matches the provided pitch collection.
+     * Find the subset of the harmonic series that most closely matches the provided pitch collection.
      *
      * @param notes The pitches to be analyzed.
      * @param error Allowable rounding error (in semitones).
@@ -21,7 +24,7 @@ const AdaptiveTuning = {
         return AdaptiveTuning.bestFitPartialsFromFreq(freqs, error);
     },
     /**
-     * Finds the subset of the harmonic series that most closely matches the provided pitch collection.
+     * Find the subset of the harmonic series that most closely matches the provided pitch collection.
      *
      * @param freqs An array of pitches to be analyzed, expressed in Hertz.
      * @param error Allowable rounding error (in semitones).
@@ -29,9 +32,8 @@ const AdaptiveTuning = {
      * @returns An object containing calculated partial numbers of the input array as well as the fundamental frequency in Hertz.
      */
     bestFitPartialsFromFreq(freqs, error = 0.5) {
-        let min = internal_1.Util.getMin(freqs).value, ratios = freqs.map(n => n / min), partials = Array(freqs.length), fundamental;
-        for (let i = 1; true; i++) {
-            fundamental = min / i;
+        let min = internal_1.Util.getMin(freqs).value, ratios = freqs.map(n => n / min), partials = Array(freqs.length), i = 1;
+        for (;; i++) {
             let j;
             for (j = 0; j < freqs.length; j++) {
                 let partial = ratios[j] * i, freqError = partial / Math.round(partial), pitchError = 12 * internal_1.Util.log2(freqError);
@@ -43,6 +45,7 @@ const AdaptiveTuning = {
             if (j == freqs.length)
                 break;
         }
+        let fundamental = min / i;
         return {
             partials,
             fundamental,

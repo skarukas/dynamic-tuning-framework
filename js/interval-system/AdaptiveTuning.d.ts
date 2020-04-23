@@ -1,9 +1,8 @@
 import { Note, IntervalTree } from "../internal";
+/** Namespace for methods that perform various types of adaptive tuning operations. */
 declare const AdaptiveTuning: {
-    currTimbre: any;
-    calculateDissonance(notes: Note[]): void;
     /**
-     * Finds the subset of the harmonic series that most closely matches the provided pitch collection.
+     * Find the subset of the harmonic series that most closely matches the provided pitch collection.
      *
      * @param notes The pitches to be analyzed.
      * @param error Allowable rounding error (in semitones).
@@ -16,7 +15,7 @@ declare const AdaptiveTuning: {
         asTree(): IntervalTree;
     };
     /**
-     * Finds the subset of the harmonic series that most closely matches the provided pitch collection.
+     * Find the subset of the harmonic series that most closely matches the provided pitch collection.
      *
      * @param freqs An array of pitches to be analyzed, expressed in Hertz.
      * @param error Allowable rounding error (in semitones).

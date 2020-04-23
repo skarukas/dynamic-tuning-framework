@@ -8,6 +8,12 @@ class IntervalTree extends internal_1.IntervalStructure {
         this.root = root;
         this.edges.set(root, new Map());
     }
+    /**
+     * Generate an ET scale as an `IntervalTree`, connected like a linked list.
+     *
+     * @param base The number of divisions per octave.
+     * @param root The `Note` upon which to start the scale. The default value is a `NullNote`, which creates a purely structural `IntervalTree`.
+     */
     static ET(base, root = new internal_1.NullNote()) {
         let result = (root instanceof internal_1.NullNote) ? new IntervalTree(root) : new internal_1.RootedIntervalTree(root);
         let curr = root;
@@ -44,9 +50,29 @@ class IntervalTree extends internal_1.IntervalStructure {
         this.edges.set(to, new Map());
         this.edges.get(to).set(from, by.inverse());
     }
+    /**
+     * Check if the `IntervalTree` contains the specified `Note`, either by reference or by frequency value.
+     *
+     * @param note The `Note` to search for.
+     */
     contains(note) {
-        return this.getAllNotes().indexOf(note) != -1;
+        // check by reference
+        if (this.getAllNotes().indexOf(note) != -1)
+            return true;
+        // check by frequency value
+        for (let n of this.getAllNotes()) {
+            if (n.equals(note))
+                return true;
+        }
+        return false;
     }
+    /**
+     * Create a new `Note` a certain interval from a note already in the tree, and add it.
+     *
+     * @param from The `Note` to connect from
+     * @param by The `Interval` to connect by
+     * @returns The newly created `Note`.
+     */
     connectAbove(from, by) {
         if (this.contains(from)) {
             let newNote = from.noteAbove(by);

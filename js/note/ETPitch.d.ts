@@ -2,7 +2,10 @@ import { Note, Interval, ETInterval } from "../internal";
 export default class ETPitch extends Note {
     pitch: number;
     base: number;
-    toString(): string;
+    /** The chromatic note name, e.g. "C#"  */
+    get name(): string;
+    /** or a custom name. */
+    set name(val: string);
     constructor(pitch: number, base?: number);
     noteAbove(interval: Interval): Note;
     transposeBy(interval: Interval): void;

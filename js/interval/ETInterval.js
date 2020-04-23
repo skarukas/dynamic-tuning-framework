@@ -1,6 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const internal_1 = require("../internal");
+/**
+ * An representation of an interval that stores the number of steps in a certain "ET" system.
+ *
+ * *immutable*
+ */
 class ETInterval extends internal_1.FracInterval {
     constructor(steps, base = 12) {
         super(steps, base);
@@ -11,8 +16,17 @@ class ETInterval extends internal_1.FracInterval {
         if (base == 0)
             throw new RangeError("Cannot create an equal division of base zero.");
     }
-    valueOf() {
-        return `${this.n} [${this.d}ET]`;
+    /** The size in steps (interval class) and base, e.g. "4 [12ET]", */
+    get name() {
+        return this.__name__ || `${this.n} [${this.d}ET]`;
+    }
+    /** or a custom name. */
+    set name(val) { this.__name__ = val; }
+    /**
+     * Creates a string representation of the interval class, e.g. "4 [12ET]""
+     */
+    toString() {
+        return this.name;
     }
     mod(modulus) {
         let other = modulus.asET(this.base), remainder = internal_1.Util.mod(this.n, other.n);

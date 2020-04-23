@@ -11,9 +11,12 @@ class ETPitch extends internal_1.Note {
         if (base == 0)
             throw new RangeError("Cannot create an equal division of base zero.");
     }
-    toString() {
-        return `${this.pitch} [/${this.base}]`;
+    /** The chromatic note name, e.g. "C#"  */
+    get name() {
+        return this.__name__ || internal_1.Util.pitchToChromaticNoteName(this.getETPitch());
     }
+    /** or a custom name. */
+    set name(val) { this.__name__ = val; }
     noteAbove(interval) {
         let newPitch = this.pitch + interval.asET(this.base).steps;
         return new this.constructor(newPitch, this.base);

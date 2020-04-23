@@ -4,6 +4,7 @@ import { PitchedObj, ETInterval } from "../internal";
  * Higher level functions for dealing with equal-tempered collections.
  */
 const ET = {
+    
     /**
      * Generate the equally divided (n-ET) scale that best approximates the given `Interval` or `Notes`.
      * `Notes` are compared to a fixed scale beginning on C, `MIDIPitch(0)`.
@@ -28,6 +29,7 @@ const ET = {
     
         return best;
     },
+
     /**
      * Generate the equally divided (n-ET) scales that best approximate the given `Interval` or `Notes`.
      * `Notes` are compared to a fixed scale beginning on C, `MIDIPitch(0)`.
@@ -51,6 +53,7 @@ const ET = {
         let sorted = errorArr.sort((a, b) => (a[1] === b[1])? a[0] - b[0] : a[1] - b[1]);
         return sorted.map((pair) => pair[0]).slice(0, howMany);
     },
+
     /**
      * Calculate the mean error of a set of pitches compared to `base`-ET. 
      * `Notes` are compared to a fixed scale beginning on C, `MIDIPitch(0)`.
@@ -73,6 +76,7 @@ const ET = {
         }
         return sum / pitched.length;
     },
+
     /**
      * Calculates the step size in cents for an equal division of the octave.
      */

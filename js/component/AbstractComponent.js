@@ -6,9 +6,9 @@ class AbstractComponent {
     }
     getRoot() { return this.root; }
     getAllNotes() { return this.notes; }
-    getNoteById(id) {
+    getNoteByName(name) {
         for (let note of this.notes) {
-            if (note.id == id)
+            if (note.name == name)
                 return note;
         }
     }

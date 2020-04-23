@@ -3,10 +3,14 @@ import { Note, Interval, Util, ETInterval } from "../internal";
 type Constructor = { new(...args: any): any }
 
 export default class ETPitch extends Note {
-
-    toString(): string {
-        return `${this.pitch} [/${this.base}]`;
+    /** The chromatic note name, e.g. "C#"  */
+    get name(): string {
+        return this.__name__ || Util.pitchToChromaticNoteName(this.getETPitch());
     }
+
+    /** or a custom name. */
+    set name(val) { this.__name__ = val }
+    
     constructor(public pitch: number, public base: number = 12) {
         super();
         if (isNaN(pitch/base)) throw new RangeError("ET pitch indices must be numeric.");

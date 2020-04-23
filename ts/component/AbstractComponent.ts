@@ -9,9 +9,9 @@ export default abstract class AbstractComponent implements Connectable {
     abstract remove(v: Note): boolean;
     getRoot() { return this.root; }
     getAllNotes(): Note[] { return this.notes; }
-    getNoteById(id: string): Note {
+    getNoteByName(name: string): Note {
         for (let note of this.notes) {
-            if (note.id == id)
+            if (note.name == name)
                 return note;
         }
     }

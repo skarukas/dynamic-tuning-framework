@@ -1,23 +1,16 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const tune = __importStar(require(".."));
+const tune = require("..");
 let notes = [
-    new tune.ETPitch(60),
+    tune.ETPitch(60),
     new tune.Frequency(300),
-    new tune.ETPitch(12, 11),
+    tune.ETPitch(12, 11),
     new tune.MIDINote(23, 70)
 ], intervals = [
-    new tune.FreqRatio(3, 2),
-    new tune.ETInterval(9, 19),
-    new tune.ETInterval(12, 12),
-    tune.Interval.octave,
+    tune.FreqRatio(3, 2),
+    tune.ETInterval(9, 19),
+    tune.ETInterval(12, 12),
+    tune.ETInterval.octave,
     tune.JI.eleventh,
     tune.JI.third
 ];

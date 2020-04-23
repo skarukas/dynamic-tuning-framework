@@ -1,4 +1,6 @@
-import * as tune from "..";
+//import * as tune from "..";
+export {} // make it a module
+const tune = require("..");
 
 test("rounding works correctly",() => {
     for (let i = 0; i < 100; i++) {
@@ -39,7 +41,7 @@ test("the number of primes up to n is within bounds",() => {
 });
 
 // reset prime array
-tune.Util.__primes = [];
+tune.Util.__primes__ = [];
 
 test("correct primes are generated for small numbers",() => {
     expect(tune.Util.primesUpTo(0)).toEqual([]);
@@ -51,7 +53,7 @@ test("correct primes are generated for small numbers",() => {
 })
 
 // reset prime array
-tune.Util.__primes = [];
+tune.Util.__primes__ = [];
 
 test("prime array for decimals is same as floor",() => {
     for (let i = 0; i < 100; i++) {

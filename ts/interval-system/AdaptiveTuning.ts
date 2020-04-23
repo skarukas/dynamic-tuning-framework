@@ -1,14 +1,18 @@
 import { Note, Util, IntervalTree, Frequency } from "../internal";
 
+/** Namespace for methods that perform various types of adaptive tuning operations. */
 const AdaptiveTuning = {
+    /*     
+    // ====== Timbre-based Analysis ======
     currTimbre: null,
+
     calculateDissonance(notes: Note[]) { 
-        /*
-            assuming it's practical to implement sethares's algorithm
-        */
-    },
+        // assuming it's practical to implement sethares's algorithm
+    }, 
+    */
+
     /**
-     * Finds the subset of the harmonic series that most closely matches the provided pitch collection.
+     * Find the subset of the harmonic series that most closely matches the provided pitch collection.
      * 
      * @param notes The pitches to be analyzed.
      * @param error Allowable rounding error (in semitones).
@@ -19,8 +23,9 @@ const AdaptiveTuning = {
         let freqs = notes.map(n => n.getFrequency());
         return AdaptiveTuning.bestFitPartialsFromFreq(freqs, error);
     },
+
     /**
-     * Finds the subset of the harmonic series that most closely matches the provided pitch collection.
+     * Find the subset of the harmonic series that most closely matches the provided pitch collection.
      * 
      * @param freqs An array of pitches to be analyzed, expressed in Hertz.
      * @param error Allowable rounding error (in semitones).
@@ -31,10 +36,9 @@ const AdaptiveTuning = {
         let min = Util.getMin(freqs).value,
             ratios = freqs.map(n => n / min),
             partials = Array(freqs.length),
-            fundamental: number;
+            i = 1;
 
-        for (let i = 1; true; i++) {
-            fundamental = min / i;
+        for (;; i++) {
             let j;
             for (j = 0; j < freqs.length; j++) {
                 let partial = ratios[j] * i,
@@ -46,10 +50,12 @@ const AdaptiveTuning = {
             }
             if (j == freqs.length) break;
         }
+        let fundamental = min / i;
+
         return { 
-            partials, 
-            fundamental, 
-            asTree(): IntervalTree {
+            partials, // array of all partial numbers 
+            fundamental, // fundamental pitch in Hz
+            asTree(): IntervalTree { // the harmonics series as an `IntervalTree`
                 return IntervalTree.harmonicSeries(partials, new Frequency(fundamental));
             }
         };

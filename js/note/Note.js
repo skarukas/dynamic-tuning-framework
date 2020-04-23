@@ -7,8 +7,8 @@ class Note extends internal_1.PitchedObj {
         this.isStructural = false; // structural notes are not played back and exist purely to give structure to the pitch tree
     }
     /**
-     * Use for filtering:
-     * `myCollection.filter(Note.inFreqRange(200, 300))`
+     * Returns a function that checks whether a `Note` is within a frequency range, inclusive.
+     * The returned function can be passed to `Array.prototype.filter()`.
      */
     static inFreqRange(lo, hi) {
         return function (note) {
@@ -16,6 +16,10 @@ class Note extends internal_1.PitchedObj {
             return freq >= lo && freq <= hi;
         };
     }
+    /**
+     * Returns a function that checks whether a `Note` is within a 12ET pitch range, inclusive.
+     * The returned function can be passed to `Array.prototype.filter()`.
+     */
     static inPitchRange(lo, hi) {
         return function (note) {
             let pitch = note.getETPitch();
@@ -26,6 +30,13 @@ class Note extends internal_1.PitchedObj {
     getAllNotes() {
         return [this];
     }
+    /**
+     * Create an equal division of an `Interval` into `div` parts, place them above the note,
+     * and collect the resulting `Notes` in an array.
+     *
+     * @param interval The interval to divide
+     * @param div The number of divisons
+     */
     dividedNotesAbove(interval, div) {
         let innerCount = Math.ceil(div) - 1, divided = interval.divide(div), result = [], curr = this;
         // add all divided bits
@@ -37,12 +48,21 @@ class Note extends internal_1.PitchedObj {
         result.push(this.noteAbove(interval));
         return result;
     }
+    /**
+     * Create an equal division of an `Interval` into `div` parts, place them below the note,
+     * and collect the resulting `Notes` in an array.
+     *
+     * @param interval The interval to divide
+     * @param div The number of divisons
+     */
     dividedNotesBelow(interval, div) {
         return this.dividedNotesAbove(interval.inverse(), div);
     }
+    /** Return the `Note` that is a given `Interval` below. */
     noteBelow(interval) {
         return this.noteAbove(interval.inverse());
     }
+    /** Return the `FreqRatio` between this `Note` and another. */
     intervalTo(other) {
         return new internal_1.FreqRatio(other.getFrequency(), this.getFrequency());
     }

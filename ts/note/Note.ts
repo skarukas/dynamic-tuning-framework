@@ -3,11 +3,11 @@ import { Connectable, PitchedObj, Interval, FreqRatio, Frequency, ETPitch, MIDIN
 
 export default abstract class Note extends PitchedObj implements Connectable {
     static middleC: ETPitch;
-    id: string; // for non-unique identification independent from actual pitch/freq, such as letter note name
     isStructural: boolean = false; // structural notes are not played back and exist purely to give structure to the pitch tree
+    
     /**
-     * Use for filtering:
-     * `myCollection.filter(Note.inFreqRange(200, 300))`
+     * Returns a function that checks whether a `Note` is within a frequency range, inclusive. 
+     * The returned function can be passed to `Array.prototype.filter()`.
      */
     static inFreqRange(lo: number, hi: number): (note: Note) => boolean {
         return function (note: Note): boolean {
@@ -15,6 +15,11 @@ export default abstract class Note extends PitchedObj implements Connectable {
             return freq >= lo && freq <= hi;
         };
     }
+
+    /**
+     * Returns a function that checks whether a `Note` is within a 12ET pitch range, inclusive. 
+     * The returned function can be passed to `Array.prototype.filter()`.
+     */
     static inPitchRange(lo: number, hi: number): (note: Note) => boolean {
         return function (note: Note): boolean {
             let pitch: number = note.getETPitch();
@@ -26,8 +31,18 @@ export default abstract class Note extends PitchedObj implements Connectable {
     getAllNotes(): Note[] {
         return [this];
     }
+
     // what if someone transposes it and it's still part of a Component?
-    abstract transposeBy(interval: Interval): void; // mutator
+    /** Mutates the `Note` by transposing it up by a certain `Interval`. */
+    abstract transposeBy(interval: Interval): void;
+
+    /**
+     * Create an equal division of an `Interval` into `div` parts, place them above the note, 
+     * and collect the resulting `Notes` in an array.
+     * 
+     * @param interval The interval to divide
+     * @param div The number of divisons
+     */
     dividedNotesAbove(interval: Interval, div: number): Note[] {
         let innerCount: number = Math.ceil(div) - 1,
             divided = interval.divide(div),
@@ -45,29 +60,52 @@ export default abstract class Note extends PitchedObj implements Connectable {
 
         return result;
     }
+
+    /**
+     * Create an equal division of an `Interval` into `div` parts, place them below the note, 
+     * and collect the resulting `Notes` in an array.
+     * 
+     * @param interval The interval to divide
+     * @param div The number of divisons
+     */
     dividedNotesBelow(interval: Interval, div: number): Note[] {
         return this.dividedNotesAbove(interval.inverse(), div);
     }
+
+    /** Return the `Note` that is a given `Interval` above. */
     abstract noteAbove(interval: Interval): Note; // non-mutator
+
+    /** Return the `Note` that is a given `Interval` below. */
     noteBelow(interval: Interval): Note {
         return this.noteAbove(interval.inverse());
     }
+
+    /** Return the pitch class number in a certain, `base` ET. */
     abstract getETPitch(base?: number): number;
+
+    /** Return the frequency in Hertz, as a number. */
     abstract getFrequency(): number;
+
+    /** Return the `FreqRatio` between this `Note` and another. */
     intervalTo(other: Note): Interval {
         return new FreqRatio(other.getFrequency(), this.getFrequency());
     }
+
     getRoot() { return this; }
+
     asFrequency(): Frequency {
         return new Frequency(this.getFrequency());
     }
+
     asET(base?: number): ETPitch {
         return new ETPitch(this.getETPitch(base), base);
     }
+
     errorInET(base: number = 12, from: Note = new MIDINote(0)): number {
         let interval = from.intervalTo(this);
         return interval.errorInET(base);
     }
+
     cents(): number {
         return ETPitch.middleC.intervalTo(this).normalized().cents();
     }
@@ -77,4 +115,3 @@ export default abstract class Note extends PitchedObj implements Connectable {
         return result.connect(other, by);
     }
 }
-

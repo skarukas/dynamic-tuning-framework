@@ -1,1 +1,1 @@
-export {};
+declare const tune: any;

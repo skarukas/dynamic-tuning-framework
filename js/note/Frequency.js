@@ -8,6 +8,12 @@ class Frequency extends internal_1.Note {
         if (!(freq > 0))
             throw new RangeError("Frequencies must be greater than zero.");
     }
+    /** The frequency of the note, e.g. "500 Hz"  */
+    get name() {
+        return this.__name__ || this.freq.toFixed() + " Hz";
+    }
+    /** or a custom name. */
+    set name(val) { this.__name__ = val; }
     noteAbove(interval) {
         let copy = new Frequency(this.freq);
         copy.transposeBy(interval);

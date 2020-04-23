@@ -1,4 +1,6 @@
-import * as tune from "..";
+//import * as tune from "..";
+export {} // make it a module
+const tune = require("..");
 
 test("Set pitches for middle C, A440, and 0",() => {
     expect(tune.Util.ETToFreq(69)).toBeCloseTo(440);
