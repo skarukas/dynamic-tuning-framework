@@ -6,13 +6,13 @@ Both may be expressed in frequency (Hz) or pitch (MIDI numbers or indexes of an 
 
 At the moment, one of the main functionalities of the library is providing a shared interface for combining and operating upon these objects, regardless of the unit of measurement. Calculations such as frequency-pitch conversions and fraction simplification are handled behind the scenes.
 
-A simple example is calculating the *syntonic comma*, the octave-normalized difference between the intervals of a just major third (5:4) and four just perfect fifths (3:2):
+A simple example is calculating the *syntonic comma*, the octave-normalized difference between the intervals of a just major third (5:4 ratio) and four just perfect fifths (3:2):
 
 ```javascript
 const tune = require("./js");
 
-let t1 = tune.JI.third, // tune.JI.third = tune.FreqRatio(5, 4)
-    t2 = tune.JI.fifth.multiply(4), // tune.JI.fifth = tune.FreqRatio(3, 2)
+let t1 = tune.JI.third,
+    t2 = tune.JI.fifth.multiply(4),
     syntonicComma = t2.subtract(t1).normalized();
     
 console.log(syntonicComma.cents()); // 21.51
