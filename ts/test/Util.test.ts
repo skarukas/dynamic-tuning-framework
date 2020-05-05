@@ -1,6 +1,4 @@
-//import * as tune from "..";
-export {} // make it a module
-const tune = require("..");
+import tune from "../tune";
 
 test("rounding works correctly",() => {
     for (let i = 0; i < 100; i++) {

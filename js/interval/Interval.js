@@ -1,12 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { PitchedObj, Util } from "../internal";
 /**
  * An interval with a size and mathematical operations that work in the pitch/log-frequency domain.
  *
  * Designed to be immutable.
  */
-class Interval extends internal_1.PitchedObj {
+export default class Interval extends PitchedObj {
     // ====== static comparison functions for sorting ======
     /**
      * Compare two intervals by size, producing a number.
@@ -45,7 +43,7 @@ class Interval extends internal_1.PitchedObj {
         return this.multiply(1 / n);
     }
     cents() {
-        return internal_1.Util.round(this.asET().steps * 100, 2);
+        return Util.round(this.asET().steps * 100, 2);
     }
     /** Returns the `ETInterval` closest in size. */
     getNearestET(base = 12) {
@@ -58,5 +56,4 @@ class Interval extends internal_1.PitchedObj {
         return this.subtract(et).cents();
     }
 }
-exports.default = Interval;
 //# sourceMappingURL=Interval.js.map

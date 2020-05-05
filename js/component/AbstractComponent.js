@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class AbstractComponent {
+export default class AbstractComponent {
     constructor(root) {
         this.root = root;
     }
@@ -20,5 +18,4 @@ class AbstractComponent {
         return this.notes.filter(callback);
     }
 }
-exports.default = AbstractComponent;
 //# sourceMappingURL=AbstractComponent.js.map

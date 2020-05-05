@@ -1,19 +1,17 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { FracInterval, Util, ETInterval, Interval } from "../internal";
 /**
  * An representation of an interval as a frequency ratio.
  *
  * *immutable*
  */
-class FreqRatio extends internal_1.FracInterval {
+export default class FreqRatio extends FracInterval {
     // FreqRatio methods
     constructor(n, d = 1) {
         if (!(n > 0 && d > 0))
             throw new RangeError("Frequency ratios must be positive.");
         // simplify ratio
         if (n % 1 || d % 1) {
-            [n, d] = internal_1.Util.dtf(n / d);
+            [n, d] = Util.dtf(n / d);
         }
         super(n, d);
     }
@@ -31,7 +29,7 @@ class FreqRatio extends internal_1.FracInterval {
     largestPrimeFactor() {
         // turn it into a ratio of integers
         let norm = this.normalized();
-        return internal_1.Util.largestPrimeFactor(norm.n * norm.d);
+        return Util.largestPrimeFactor(norm.n * norm.d);
     }
     /** Return the frequency ratio as a decimal. */
     decimal() {
@@ -41,7 +39,7 @@ class FreqRatio extends internal_1.FracInterval {
         return `${this.n}:${this.d}`;
     }
     mod(modulus) {
-        let decimalBase = modulus.asFrequency().decimal(), remainder = internal_1.Util.powerMod(this.decimal(), decimalBase);
+        let decimalBase = modulus.asFrequency().decimal(), remainder = Util.powerMod(this.decimal(), decimalBase);
         return new FreqRatio(remainder);
     }
     multiply(factor) {
@@ -51,8 +49,8 @@ class FreqRatio extends internal_1.FracInterval {
     }
     asFrequency() { return this; }
     asET(base = 12) {
-        let num = base * internal_1.Util.log2(this.decimal());
-        return new internal_1.ETInterval(num, base);
+        let num = base * Util.log2(this.decimal());
+        return new ETInterval(num, base);
     }
     inverse() {
         return new FreqRatio(this.d, this.n);
@@ -62,6 +60,5 @@ class FreqRatio extends internal_1.FracInterval {
         return FreqRatio.fromFraction(product);
     }
 }
-exports.default = FreqRatio;
-internal_1.Interval.octave = new FreqRatio(2);
+Interval.octave = new FreqRatio(2);
 //# sourceMappingURL=FreqRatio.js.map

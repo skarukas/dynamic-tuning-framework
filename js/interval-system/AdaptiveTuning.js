@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { Util, IntervalTree, Frequency } from "../internal";
 /** Namespace for methods that perform various types of adaptive tuning operations. */
 const AdaptiveTuning = {
     /*
@@ -32,11 +30,11 @@ const AdaptiveTuning = {
      * @returns An object containing calculated partial numbers of the input array as well as the fundamental frequency in Hertz.
      */
     bestFitPartialsFromFreq(freqs, error = 0.5) {
-        let min = internal_1.Util.getMin(freqs).value, ratios = freqs.map(n => n / min), partials = Array(freqs.length), i = 1;
+        let min = Util.getMin(freqs).value, ratios = freqs.map(n => n / min), partials = Array(freqs.length), i = 1;
         for (;; i++) {
             let j;
             for (j = 0; j < freqs.length; j++) {
-                let partial = ratios[j] * i, freqError = partial / Math.round(partial), pitchError = 12 * internal_1.Util.log2(freqError);
+                let partial = ratios[j] * i, freqError = partial / Math.round(partial), pitchError = 12 * Util.log2(freqError);
                 if (Math.abs(pitchError) < error)
                     partials[j] = Math.round(partial);
                 else
@@ -50,10 +48,10 @@ const AdaptiveTuning = {
             partials,
             fundamental,
             asTree() {
-                return internal_1.IntervalTree.harmonicSeries(partials, new internal_1.Frequency(fundamental));
+                return IntervalTree.harmonicSeries(partials, new Frequency(fundamental));
             }
         };
     }
 };
-exports.default = AdaptiveTuning;
+export default AdaptiveTuning;
 //# sourceMappingURL=AdaptiveTuning.js.map

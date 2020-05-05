@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
-class Frequency extends internal_1.Note {
+import { Note, Util } from "../internal";
+export default class Frequency extends Note {
     constructor(freq) {
         super();
         this.freq = freq;
@@ -23,11 +21,10 @@ class Frequency extends internal_1.Note {
         this.freq *= interval.asFrequency().decimal();
     }
     getETPitch(base = 12) {
-        return internal_1.Util.freqToET(this.freq, base);
+        return Util.freqToET(this.freq, base);
     }
     getFrequency() {
         return this.freq;
     }
 }
-exports.default = Frequency;
 //# sourceMappingURL=Frequency.js.map

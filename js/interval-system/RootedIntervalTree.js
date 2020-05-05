@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
-class RootedIntervalTree extends internal_1.IntervalTree {
+import { IntervalTree } from "../internal";
+export default class RootedIntervalTree extends IntervalTree {
     inverse() {
         return super.inverse().withRoot(this.root);
     }
@@ -9,5 +7,4 @@ class RootedIntervalTree extends internal_1.IntervalTree {
         super(root);
     }
 }
-exports.default = RootedIntervalTree;
 //# sourceMappingURL=RootedIntervalTree.js.map

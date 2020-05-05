@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { ETInterval } from "../internal";
 /**
  * Higher level functions for dealing with equal-tempered collections.
  */
@@ -80,8 +78,8 @@ const ET = {
      * Calculates the step size in cents for an equal division of the octave.
      */
     stepSizeForET(base) {
-        return (new internal_1.ETInterval(1, base)).cents();
+        return (new ETInterval(1, base)).cents();
     }
 };
-exports.default = ET;
+export default ET;
 //# sourceMappingURL=ET.js.map

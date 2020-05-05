@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const tune = require("..");
+import tune from "../tune";
 test("rounding works correctly", () => {
     for (let i = 0; i < 100; i++) {
         // random decimals (-500 <= n <= 500)

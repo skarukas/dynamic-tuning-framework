@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { Note } from "../internal";
 /**
  * A `Note` with no pitch, used for interval structures without a definite transposition.
  */
-class NullNote extends internal_1.Note {
+export default class NullNote extends Note {
     /** Either an empty string or a custom name. */
     get name() {
         return this.__name__;
@@ -45,5 +43,4 @@ class NullNote extends internal_1.Note {
         return NaN;
     }
 }
-exports.default = NullNote;
 //# sourceMappingURL=NullNote.js.map

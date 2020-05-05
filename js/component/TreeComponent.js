@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
-class TreeComponent extends internal_1.Component {
+import { Component } from "../internal";
+export default class TreeComponent extends Component {
     setInterval(a, b, interval) {
         let diff = interval.subtract(a.intervalTo(b)), descendants = this.getSubTree(b, a);
         // transpose b and all its descendants (to preserve other intervals)
@@ -68,5 +66,4 @@ class TreeComponent extends internal_1.Component {
         return hasKey;
     }
 }
-exports.default = TreeComponent;
 //# sourceMappingURL=TreeComponent.js.map

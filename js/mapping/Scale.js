@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { Note, Util, Interval, ETInterval } from "../internal";
 /**
  * Maps integers (MIDI pitches) to `Notes` according a musical scale.
  * Intervals of repetition may be set for both the input (`notesPerOctave`) and the output (`octaveSize`).
@@ -14,8 +12,8 @@ const internal_1 = require("../internal");
  * - `new Scale(12, JI.fifth)` creates a 12-note scale that repeats at a fifth and whose 12 indices
  *    may be remapped to any interval smaller than a fifth (defaults to equal division).
  */
-class Scale {
-    constructor(notesPerOctave = 12, octaveSize = internal_1.Interval.octave, middleCPitch = internal_1.Note.middleC.asET(notesPerOctave)) {
+export default class Scale {
+    constructor(notesPerOctave = 12, octaveSize = Interval.octave, middleCPitch = Note.middleC.asET(notesPerOctave)) {
         /**
          * The input note at which to begin the scale.
          * Any integer equivalent mod `notesPerOctave` will produce the same result.
@@ -44,7 +42,7 @@ class Scale {
     get(input) {
         if (!Number.isInteger(input))
             throw new Error("Scale inputs must be integers.");
-        let diff = input - this.root, [numOctaves, index] = internal_1.Util.divide(diff, this.notesPerOctave), interval = this.getIntervalByScaleIndex(index), rootNote = this.getRootNote(), scaledInterval = interval.add(this.octaveSize.multiply(numOctaves));
+        let diff = input - this.root, [numOctaves, index] = Util.divide(diff, this.notesPerOctave), interval = this.getIntervalByScaleIndex(index), rootNote = this.getRootNote(), scaledInterval = interval.add(this.octaveSize.multiply(numOctaves));
         return rootNote.noteAbove(scaledInterval);
     }
     /**
@@ -59,9 +57,9 @@ class Scale {
         if (!Number.isInteger(input))
             throw new Error("Scale inputs must be integers.");
         // get index within input scale
-        let modIndex = internal_1.Util.mod(input - this.root, this.notesPerOctave), 
+        let modIndex = Util.mod(input - this.root, this.notesPerOctave), 
         // create interval from the root note (if not already an interval)
-        interval = (value instanceof internal_1.Note) ? this.getRootNote().intervalTo(value) : value;
+        interval = (value instanceof Note) ? this.getRootNote().intervalTo(value) : value;
         if (modIndex == 0)
             throw new Error("Can't change the root of a mapping");
         // resize interval to be within scale range and set value
@@ -77,7 +75,7 @@ class Scale {
      * @return `this`
      */
     setByIndex(index, value) {
-        if (!internal_1.Util.isValidIndex(index, this.notesPerOctave))
+        if (!Util.isValidIndex(index, this.notesPerOctave))
             throw new RangeError("Scale indices must be integers in the range [0, notesPerOctave).");
         this.map[index] = value.mod(this.octaveSize);
         return this;
@@ -91,7 +89,7 @@ class Scale {
      */
     setFixedMapping(input, output) {
         // Transpose `input` and `output` until `input` is an index in the scale range
-        let [numOctaves, index] = internal_1.Util.divide(input, this.notesPerOctave);
+        let [numOctaves, index] = Util.divide(input, this.notesPerOctave);
         // set these as the Scale's reference input and output
         this.fixedInput = index;
         this.fixedOutput = output.noteBelow(this.octaveSize.multiply(numOctaves));
@@ -105,18 +103,18 @@ class Scale {
     setRoot(root) {
         if (!Number.isInteger(root))
             throw new RangeError("Input values must be integers.");
-        this.root = internal_1.Util.mod(root, this.notesPerOctave);
+        this.root = Util.mod(root, this.notesPerOctave);
         return this;
     }
     /** Set the scale indices to be entirely equal-tempered `Intervals` according to `Scale.notesPerOctave`. */
     equallyDivide() {
-        let base = this.notesPerOctave, step = this.octaveSize.equals(internal_1.Interval.octave) ? new internal_1.ETInterval(1, base) : this.octaveSize.divide(base).asET(base);
+        let base = this.notesPerOctave, step = this.octaveSize.equals(Interval.octave) ? new ETInterval(1, base) : this.octaveSize.divide(base).asET(base);
         for (let i = 0; i < base; i++)
             this.map[i] = step.multiply(i);
     }
     /** Retrieves the `Interval` by an index with validation. */
     getIntervalByScaleIndex(index) {
-        let valid = internal_1.Util.isValidIndex(index, this.notesPerOctave);
+        let valid = Util.isValidIndex(index, this.notesPerOctave);
         if (valid)
             return this.map[index];
         else
@@ -124,7 +122,7 @@ class Scale {
     }
     /** Retrieve the root as a `Note`.*/
     getRootNote() {
-        let diff = this.fixedInput - this.root, [numOctaves, index] = internal_1.Util.divide(diff, this.notesPerOctave), fixedInterval = this.getIntervalByScaleIndex(index);
+        let diff = this.fixedInput - this.root, [numOctaves, index] = Util.divide(diff, this.notesPerOctave), fixedInterval = this.getIntervalByScaleIndex(index);
         return this.fixedOutput.noteBelow(fixedInterval.add(this.octaveSize.multiply(numOctaves)));
     }
     /** Display the Scale as a set of `Intervals` */
@@ -132,5 +130,4 @@ class Scale {
         return this.map.toString();
     }
 }
-exports.default = Scale;
 //# sourceMappingURL=Scale.js.map

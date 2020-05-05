@@ -1,5 +1,4 @@
-//import * as tune from "..";
-const tune = require("..");
+import tune from "../tune";
 
 test("Connecting returns the new note",() => {
     let root = tune.ETPitch(10),

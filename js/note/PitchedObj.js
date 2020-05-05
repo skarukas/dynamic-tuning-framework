@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class PitchedObj {
+export default class PitchedObj {
     constructor() {
         this.__name__ = "";
     }
@@ -12,5 +10,4 @@ class PitchedObj {
         return this.name;
     }
 }
-exports.default = PitchedObj;
 //# sourceMappingURL=PitchedObj.js.map

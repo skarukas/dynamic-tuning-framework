@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
-class ETPitch extends internal_1.Note {
+import { Note, Util, ETInterval } from "../internal";
+export default class ETPitch extends Note {
     constructor(pitch, base = 12) {
         super();
         this.pitch = pitch;
@@ -13,7 +11,7 @@ class ETPitch extends internal_1.Note {
     }
     /** The chromatic note name, e.g. "C#"  */
     get name() {
-        return this.__name__ || internal_1.Util.pitchToChromaticNoteName(this.getETPitch());
+        return this.__name__ || Util.pitchToChromaticNoteName(this.getETPitch());
     }
     /** or a custom name. */
     set name(val) { this.__name__ = val; }
@@ -28,12 +26,11 @@ class ETPitch extends internal_1.Note {
         return this.pitch * base / this.base;
     }
     getFrequency() {
-        return internal_1.Util.ETToFreq(this.pitch, this.base);
+        return Util.ETToFreq(this.pitch, this.base);
     }
     intervalTo(other) {
-        return new internal_1.ETInterval(other.getETPitch(this.base) - this.pitch, this.base);
+        return new ETInterval(other.getETPitch(this.base) - this.pitch, this.base);
     }
 }
-exports.default = ETPitch;
-internal_1.Note.middleC = new ETPitch(60);
+Note.middleC = new ETPitch(60);
 //# sourceMappingURL=ETPitch.js.map

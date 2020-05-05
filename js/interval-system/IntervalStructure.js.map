@@ -1,1 +1,1 @@
-{"version":3,"file":"IntervalStructure.js","sourceRoot":"","sources":["../../ts/interval-system/IntervalStructure.ts"],"names":[],"mappings":";;AAEA,MAAqB,iBAAiB;IAGlC;QACI,IAAI,CAAC,KAAK,GAAG,IAAI,GAAG,EAA6B,CAAC;IACtD,CAAC;CACJ;AAND,oCAMC"}
+{"version":3,"file":"IntervalStructure.js","sourceRoot":"","sources":["../../ts/interval-system/IntervalStructure.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,OAAO,OAAO,iBAAiB;IAGlC;QACI,IAAI,CAAC,KAAK,GAAG,IAAI,GAAG,EAA6B,CAAC;IACtD,CAAC;CACJ"}

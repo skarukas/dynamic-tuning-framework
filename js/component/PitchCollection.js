@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class PitchCollection {
+export default class PitchCollection {
     add(c) {
         this.components.push(c);
     }
@@ -8,5 +6,4 @@ class PitchCollection {
         return this.components.length;
     }
 }
-exports.default = PitchCollection;
 //# sourceMappingURL=PitchCollection.js.map

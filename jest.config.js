@@ -7,6 +7,7 @@ module.exports = {
     "**/test/**/!(*.d).+(ts|tsx|js)",
   ],
   "transform": {
+    ".+\.js$": "babel-jest",
     "^.+\\.(ts|tsx)$": "ts-jest"
   }
 }

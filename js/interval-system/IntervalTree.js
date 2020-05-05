@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { IntervalStructure, NullNote, FreqRatio, ETInterval, RootedIntervalTree } from "../internal";
 // seperate class for non-null notes?
-class IntervalTree extends internal_1.IntervalStructure {
-    constructor(root = new internal_1.NullNote()) {
+export default class IntervalTree extends IntervalStructure {
+    constructor(root = new NullNote()) {
         super();
         this.root = root;
         this.edges.set(root, new Map());
@@ -14,11 +12,11 @@ class IntervalTree extends internal_1.IntervalStructure {
      * @param base The number of divisions per octave.
      * @param root The `Note` upon which to start the scale. The default value is a `NullNote`, which creates a purely structural `IntervalTree`.
      */
-    static ET(base, root = new internal_1.NullNote()) {
-        let result = (root instanceof internal_1.NullNote) ? new IntervalTree(root) : new internal_1.RootedIntervalTree(root);
+    static ET(base, root = new NullNote()) {
+        let result = (root instanceof NullNote) ? new IntervalTree(root) : new RootedIntervalTree(root);
         let curr = root;
         for (let i = 0; i < base - 1; i++) {
-            curr = result.connectAbove(curr, new internal_1.ETInterval(1, base));
+            curr = result.connectAbove(curr, new ETInterval(1, base));
         }
         return result;
     }
@@ -28,8 +26,8 @@ class IntervalTree extends internal_1.IntervalStructure {
      * @param range Range of partial numbers, either specified as an upper bound (inclusive) or an array
      * @param fundamental The `Note` to set as the fundamental (root of the tree). The default value is a `NullNote`, which creates a purely structural `IntervalTree`.
      */
-    static harmonicSeries(range, fundamental = new internal_1.NullNote()) {
-        let result = (fundamental instanceof internal_1.NullNote) ? new IntervalTree(fundamental) : new internal_1.RootedIntervalTree(fundamental);
+    static harmonicSeries(range, fundamental = new NullNote()) {
+        let result = (fundamental instanceof NullNote) ? new IntervalTree(fundamental) : new RootedIntervalTree(fundamental);
         fundamental.isStructural = true;
         if (typeof range == "number") {
             // Array of numbers from 1 to range, inclusive
@@ -38,7 +36,7 @@ class IntervalTree extends internal_1.IntervalStructure {
         for (let i of range) {
             if (i == 1)
                 fundamental.isStructural = false;
-            result.connectAbove(result.root, new internal_1.FreqRatio(i));
+            result.connectAbove(result.root, new FreqRatio(i));
         }
         return result;
     }
@@ -106,7 +104,7 @@ class IntervalTree extends internal_1.IntervalStructure {
         return this.edges.get(from).get(to);
     }
     withRoot(root) {
-        let result = new internal_1.RootedIntervalTree(root), thisQueue = [this.root], resultQueue = [root], visited = new Map();
+        let result = new RootedIntervalTree(root), thisQueue = [this.root], resultQueue = [root], visited = new Map();
         for (let note of this.getAllNotes())
             visited.set(note, false);
         while (thisQueue.length) {
@@ -125,5 +123,4 @@ class IntervalTree extends internal_1.IntervalStructure {
         return result;
     }
 }
-exports.default = IntervalTree;
 //# sourceMappingURL=IntervalTree.js.map

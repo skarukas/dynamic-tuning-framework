@@ -1,12 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { FracInterval, Util, FreqRatio } from "../internal";
 /**
  * An representation of an interval that stores the number of steps in a certain "ET" system.
  *
  * *immutable*
  */
-class ETInterval extends internal_1.FracInterval {
+export default class ETInterval extends FracInterval {
     constructor(steps, base = 12) {
         super(steps, base);
         this.steps = steps;
@@ -29,7 +27,7 @@ class ETInterval extends internal_1.FracInterval {
         return this.name;
     }
     mod(modulus) {
-        let other = modulus.asET(this.base), remainder = internal_1.Util.mod(this.n, other.n);
+        let other = modulus.asET(this.base), remainder = Util.mod(this.n, other.n);
         return new ETInterval(remainder, this.d);
     }
     multiply(factor) {
@@ -39,8 +37,8 @@ class ETInterval extends internal_1.FracInterval {
     }
     asFrequency() {
         let decimal = Math.pow(2, (this.steps / this.base));
-        let [a, b] = internal_1.Util.dtf(decimal);
-        return new internal_1.FreqRatio(a, b);
+        let [a, b] = Util.dtf(decimal);
+        return new FreqRatio(a, b);
     }
     asET(base = 12) {
         if (base == this.base)
@@ -55,5 +53,4 @@ class ETInterval extends internal_1.FracInterval {
         return new ETInterval(this.n + _other.n, this.base);
     }
 }
-exports.default = ETInterval;
 //# sourceMappingURL=ETInterval.js.map

@@ -1,13 +1,11 @@
-//import * as tune from "..";
-export {} // make it a module
-const tune = require("..");
+import tune from "../tune";
 
 let notes = [
         tune.ETPitch(60), 
         new tune.Frequency(300), // new is optional
         tune.ETPitch(12, 11),
         new tune.MIDINote(23, 70)
-    ], 
+    ],
     intervals = [
         tune.FreqRatio(3, 2),
         tune.ETInterval(9, 19),

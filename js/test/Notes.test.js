@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const tune = require("..");
+import tune from "../tune";
 let notes = [
     tune.ETPitch(60),
     new tune.Frequency(300),

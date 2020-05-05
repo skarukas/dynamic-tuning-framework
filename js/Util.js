@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const Util = {
     // ====== Math Utils ======
     /** Round `n` to a certain number of decimal `places`. */
@@ -147,5 +145,5 @@ const Util = {
     /** Check whether `index` is an integer in the interval `[0, length)`. */
     isValidIndex: (index, length) => (index >= 0) && (Util.mod(index, 1) == 0) && (index < length),
 };
-exports.default = Util;
+export default Util;
 //# sourceMappingURL=Util.js.map

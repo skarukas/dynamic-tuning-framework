@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
+import { Util } from "../internal";
 function powerMod(n, base) {
     let log = Math.log(n) / Math.log(base);
     let mod = ((log % 1) + 1) % 1;
@@ -68,7 +66,7 @@ function generatePowerTree2(depth, generators = [3, 5, 7]) {
     }
     let strings = new Set();
     for (let p of result)
-        strings.add(internal_1.Util.dtf(p));
+        strings.add(Util.dtf(p));
     return Array.from(strings).sort((a, b) => eval(a) - eval(b));
 }
 /*

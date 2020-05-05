@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const internal_1 = require("../internal");
-class Note extends internal_1.PitchedObj {
+import { PitchedObj, FreqRatio, Frequency, ETPitch, MIDINote, TreeComponent } from "../internal";
+export default class Note extends PitchedObj {
     constructor() {
         super(...arguments);
         this.isStructural = false; // structural notes are not played back and exist purely to give structure to the pitch tree
@@ -64,26 +62,25 @@ class Note extends internal_1.PitchedObj {
     }
     /** Return the `FreqRatio` between this `Note` and another. */
     intervalTo(other) {
-        return new internal_1.FreqRatio(other.getFrequency(), this.getFrequency());
+        return new FreqRatio(other.getFrequency(), this.getFrequency());
     }
     getRoot() { return this; }
     asFrequency() {
-        return new internal_1.Frequency(this.getFrequency());
+        return new Frequency(this.getFrequency());
     }
     asET(base) {
-        return new internal_1.ETPitch(this.getETPitch(base), base);
+        return new ETPitch(this.getETPitch(base), base);
     }
-    errorInET(base = 12, from = new internal_1.MIDINote(0)) {
+    errorInET(base = 12, from = new MIDINote(0)) {
         let interval = from.intervalTo(this);
         return interval.errorInET(base);
     }
     cents() {
-        return internal_1.ETPitch.middleC.intervalTo(this).normalized().cents();
+        return ETPitch.middleC.intervalTo(this).normalized().cents();
     }
     connect(other, by) {
-        let result = new internal_1.TreeComponent(this);
+        let result = new TreeComponent(this);
         return result.connect(other, by);
     }
 }
-exports.default = Note;
 //# sourceMappingURL=Note.js.map
