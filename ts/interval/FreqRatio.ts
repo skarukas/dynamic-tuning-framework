@@ -1,5 +1,6 @@
 import { FracInterval, Util, Fraction, ETInterval, Interval } from "../internal";
 
+type Constructor = { new(...args: any): any }
 /**
  * An representation of an interval as a frequency ratio.
  * 
@@ -28,7 +29,7 @@ export default class FreqRatio extends FracInterval {
 
     /** Creates a `FreqRatio` from a `Fraction`. */
     static fromFraction(frac: Fraction): FreqRatio {
-        return new FreqRatio(frac.n, frac.d);
+        return new (this.constructor as Constructor)(frac.n, frac.d);
     }
 
     /** Returns the largest prime number involved in the ratio. */
@@ -50,12 +51,12 @@ export default class FreqRatio extends FracInterval {
     mod(modulus: Interval): FreqRatio {
         let decimalBase: number = modulus.asFrequency().decimal(),
             remainder: number = Util.powerMod(this.decimal(), decimalBase);
-        return new FreqRatio(remainder);
+        return new (this.constructor as Constructor)(remainder);
     }
 
     multiply(factor: number): FreqRatio {
         if (isNaN(factor)) throw new RangeError("Factors must be numeric.");
-        return new FreqRatio(this.n ** factor, this.d ** factor);
+        return new (this.constructor as Constructor)(this.n ** factor, this.d ** factor);
     }
 
     asFrequency(): FreqRatio { return this; }
@@ -66,7 +67,7 @@ export default class FreqRatio extends FracInterval {
     }
 
     inverse(): FreqRatio {
-        return new FreqRatio(this.d, this.n);
+        return new (this.constructor as Constructor)(this.d, this.n);
     }
 
     add(other: FreqRatio): FreqRatio {

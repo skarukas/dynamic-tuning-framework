@@ -1,5 +1,5 @@
 import { FracInterval, Interval, Util, FreqRatio } from "../internal";
-
+type Constructor = { new(...args: any): any }
 /**
  * An representation of an interval that stores the number of steps in a certain "ET" system.
  * 
@@ -15,7 +15,7 @@ export default class ETInterval extends FracInterval {
 
     /** The size in steps (interval class) and base, e.g. "4 [12ET]", */
     get name(): string {
-        return this.__name__ || `${this.n} [${this.d}ET]`;
+        return this.__name__ || `${this.n.toFixed(2)} [${this.d}ET]`;
     }
     
     /** or a custom name. */
@@ -31,12 +31,12 @@ export default class ETInterval extends FracInterval {
     mod(modulus: Interval): ETInterval {
         let other: ETInterval = modulus.asET(this.base),
             remainder = Util.mod(this.n, other.n);
-        return new ETInterval(remainder, this.d);
+        return new (this.constructor as Constructor)(remainder, this.d);
     }
 
     multiply(factor: number): Interval {
         if (isNaN(factor)) throw new RangeError("Factors must be numeric.");
-        return new ETInterval(this.n * factor, this.d);
+        return new (this.constructor as Constructor)(this.n * factor, this.d);
     }
 
     asFrequency(): FreqRatio {
@@ -52,11 +52,11 @@ export default class ETInterval extends FracInterval {
     }
 
     inverse(): Interval {
-        return new ETInterval(-this.n, this.d);
+        return new (this.constructor as Constructor)(-this.n, this.d);
     }
 
     add(other: Interval): Interval {
         let _other: ETInterval = other.asET(this.base);
-        return new ETInterval(this.n + _other.n, this.base);
+        return new (this.constructor as Constructor)(this.n + _other.n, this.base);
     }
 }

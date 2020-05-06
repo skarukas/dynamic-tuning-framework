@@ -70,6 +70,11 @@ export default abstract class Interval extends PitchedObj {
         return this.multiply(1 / n);
     }
 
+    /** Divide the interval by another Interval. */
+    divideByInterval(other: Interval): number {
+        return this.cents() / other.cents();
+    }
+
     abstract asFrequency(): FreqRatio;
     abstract asET(base?: number): ETInterval;
 

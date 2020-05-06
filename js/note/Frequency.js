@@ -13,7 +13,7 @@ export default class Frequency extends Note {
     /** or a custom name. */
     set name(val) { this.__name__ = val; }
     noteAbove(interval) {
-        let copy = new Frequency(this.freq);
+        let copy = new this.constructor(this.freq);
         copy.transposeBy(interval);
         return copy;
     }

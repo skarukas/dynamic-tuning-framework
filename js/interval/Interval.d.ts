@@ -39,6 +39,8 @@ export default abstract class Interval extends PitchedObj {
     abstract multiply(factor: number): Interval;
     /** Divide the interval by a certain number. */
     divide(n: number): Interval;
+    /** Divide the interval by another Interval. */
+    divideByInterval(other: Interval): number;
     abstract asFrequency(): FreqRatio;
     abstract asET(base?: number): ETInterval;
     cents(): number;

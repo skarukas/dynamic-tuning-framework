@@ -1,4 +1,5 @@
 import {Interval, Note, Util } from "../internal";
+type Constructor = { new(...args: any): any }
 
 export default class Frequency extends Note {
     /** The frequency of the note, e.g. "500 Hz"  */
@@ -10,7 +11,7 @@ export default class Frequency extends Note {
     set name(val) { this.__name__ = val }
 
     noteAbove(interval: Interval): Note {
-        let copy = new Frequency(this.freq);
+        let copy = new (this.constructor as Constructor)(this.freq);
         copy.transposeBy(interval);
         return copy;
     }

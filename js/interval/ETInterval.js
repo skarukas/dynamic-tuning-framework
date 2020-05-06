@@ -16,7 +16,7 @@ export default class ETInterval extends FracInterval {
     }
     /** The size in steps (interval class) and base, e.g. "4 [12ET]", */
     get name() {
-        return this.__name__ || `${this.n} [${this.d}ET]`;
+        return this.__name__ || `${this.n.toFixed(2)} [${this.d}ET]`;
     }
     /** or a custom name. */
     set name(val) { this.__name__ = val; }
@@ -28,12 +28,12 @@ export default class ETInterval extends FracInterval {
     }
     mod(modulus) {
         let other = modulus.asET(this.base), remainder = Util.mod(this.n, other.n);
-        return new ETInterval(remainder, this.d);
+        return new this.constructor(remainder, this.d);
     }
     multiply(factor) {
         if (isNaN(factor))
             throw new RangeError("Factors must be numeric.");
-        return new ETInterval(this.n * factor, this.d);
+        return new this.constructor(this.n * factor, this.d);
     }
     asFrequency() {
         let decimal = Math.pow(2, (this.steps / this.base));
@@ -46,11 +46,11 @@ export default class ETInterval extends FracInterval {
         return new ETInterval(this.frac.decimal() * base, base);
     }
     inverse() {
-        return new ETInterval(-this.n, this.d);
+        return new this.constructor(-this.n, this.d);
     }
     add(other) {
         let _other = other.asET(this.base);
-        return new ETInterval(this.n + _other.n, this.base);
+        return new this.constructor(this.n + _other.n, this.base);
     }
 }
 //# sourceMappingURL=ETInterval.js.map

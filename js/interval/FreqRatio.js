@@ -23,7 +23,7 @@ export default class FreqRatio extends FracInterval {
     set name(val) { this.__name__ = val; }
     /** Creates a `FreqRatio` from a `Fraction`. */
     static fromFraction(frac) {
-        return new FreqRatio(frac.n, frac.d);
+        return new this.constructor(frac.n, frac.d);
     }
     /** Returns the largest prime number involved in the ratio. */
     largestPrimeFactor() {
@@ -40,12 +40,12 @@ export default class FreqRatio extends FracInterval {
     }
     mod(modulus) {
         let decimalBase = modulus.asFrequency().decimal(), remainder = Util.powerMod(this.decimal(), decimalBase);
-        return new FreqRatio(remainder);
+        return new this.constructor(remainder);
     }
     multiply(factor) {
         if (isNaN(factor))
             throw new RangeError("Factors must be numeric.");
-        return new FreqRatio(Math.pow(this.n, factor), Math.pow(this.d, factor));
+        return new this.constructor(Math.pow(this.n, factor), Math.pow(this.d, factor));
     }
     asFrequency() { return this; }
     asET(base = 12) {
@@ -53,7 +53,7 @@ export default class FreqRatio extends FracInterval {
         return new ETInterval(num, base);
     }
     inverse() {
-        return new FreqRatio(this.d, this.n);
+        return new this.constructor(this.d, this.n);
     }
     add(other) {
         let ratio = other.asFrequency(), product = this.frac.times(ratio.frac);

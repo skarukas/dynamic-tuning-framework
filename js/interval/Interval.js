@@ -42,6 +42,10 @@ export default class Interval extends PitchedObj {
     divide(n) {
         return this.multiply(1 / n);
     }
+    /** Divide the interval by another Interval. */
+    divideByInterval(other) {
+        return this.cents() / other.cents();
+    }
     cents() {
         return Util.round(this.asET().steps * 100, 2);
     }
