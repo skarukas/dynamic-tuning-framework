@@ -242,7 +242,7 @@
             return interval.errorInET(base);
         }
         cents() {
-            return ETPitch.middleC.intervalTo(this).normalized().cents();
+            return (new ETPitch(0)).intervalTo(this).cents();
         }
         connect(other, by) {
             let result = new TreeComponent(this);
@@ -631,7 +631,7 @@
         set name(val) { this.__name__ = val; }
         /** Creates a `FreqRatio` from a `Fraction`. */
         static fromFraction(frac) {
-            return new this.constructor(frac.n, frac.d);
+            return new FreqRatio(frac.n, frac.d);
         }
         /** Returns the largest prime number involved in the ratio. */
         largestPrimeFactor() {

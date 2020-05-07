@@ -76,7 +76,7 @@ export default class Note extends PitchedObj {
         return interval.errorInET(base);
     }
     cents() {
-        return ETPitch.middleC.intervalTo(this).normalized().cents();
+        return (new ETPitch(0)).intervalTo(this).cents();
     }
     connect(other, by) {
         let result = new TreeComponent(this);

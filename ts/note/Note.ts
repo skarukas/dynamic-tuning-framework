@@ -107,7 +107,7 @@ export default abstract class Note extends PitchedObj implements Connectable {
     }
 
     cents(): number {
-        return ETPitch.middleC.intervalTo(this).normalized().cents();
+        return (new ETPitch(0)).intervalTo(this).cents();
     }
 
     connect(other: Connectable, by: Interval): Component {

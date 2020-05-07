@@ -29,7 +29,7 @@ export default class FreqRatio extends FracInterval {
 
     /** Creates a `FreqRatio` from a `Fraction`. */
     static fromFraction(frac: Fraction): FreqRatio {
-        return new (this.constructor as Constructor)(frac.n, frac.d);
+        return new FreqRatio(frac.n, frac.d);
     }
 
     /** Returns the largest prime number involved in the ratio. */
