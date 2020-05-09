@@ -15,7 +15,12 @@ const Util = {
     log2:(n: number) => Util.log(n, 2),
 
     /** Calculate the modulo of two numbers. In contrast to `%`, this never returns a negative number. */
-    mod: (n: number, base: number): number => ((n % base) + base) % base,
+    mod: (n: number, base: number): number => {
+        //correct for rounding err
+        let m = (n % base);
+        m = (Math.abs(m) < 1e-14)? 0 : m;
+        return (m + base) % base;
+    },
 
     /**
      * Calculate the quotient and remainder when dividing two numbers

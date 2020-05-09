@@ -10,7 +10,7 @@ export default class ETInterval extends FracInterval {
     constructor(public readonly steps: number, public readonly base: number = 12) {
         super(steps, base);
         if (isNaN(steps/base)) throw new RangeError("ET pitch indices must be numeric.");
-        if (base == 0) throw new RangeError("Cannot create an equal division of base zero.");
+        if (base <= 0) throw new RangeError("Cannot create an equal division with base <= 0.");
     }
 
     /** The size in steps (interval class) and base, e.g. "4 [12ET]", */
