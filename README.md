@@ -9,7 +9,6 @@ At the moment, one of the main functionalities of the library is providing a sha
 A simple example is calculating the *syntonic comma*, the octave-normalized difference between the intervals of a just major third (5:4 ratio) and four just perfect fifths (3:2):
 
 ```javascript
-const tune = require("./js");
 
 let t1 = tune.JI.third,
     t2 = tune.JI.fifth.multiply(4),
