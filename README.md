@@ -1,7 +1,7 @@
 # tune
 Object-oriented TS library for musical tuning of pitch collections.
 
-This (work in progress) library provides object-oriented representations for musical objects such as pitches and intervals. 
+This library provides object-oriented representations for musical objects such as pitches and intervals. 
 Both may be expressed in frequency (Hz) or pitch (MIDI numbers or indexes of an equal tempered scale).
 
 At the moment, one of the main functionalities of the library is providing a shared interface for combining and operating upon these objects, regardless of the unit of measurement. Calculations such as frequency-pitch conversions and fraction simplification are handled behind the scenes.
